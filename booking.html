@@ -479,7 +479,7 @@
                             }
                         }
                         let nTime = b.time;
-                        if (b.time && String(b.time).includes("GMT")) {
+                        if (b.time && (String(b.time).includes("GMT") || String(b.time).includes("T"))) {
                             const t = new Date(b.time);
                             if (!isNaN(t)) {
                                 nTime = `${String(t.getHours()).padStart(2, '0')}:${String(t.getMinutes()).padStart(2, '0')}`;
