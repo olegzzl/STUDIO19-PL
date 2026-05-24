@@ -170,6 +170,14 @@ function doGet(e) {
     // ==========================================
     async function loadBookings() {
         if (!GOOGLE_SCRIPT_URL) return;
+        
+        const _btn = document.querySelector('#booking-form button[type="submit"]');
+        if (_btn) {
+            _btn.disabled = true;
+            _btn.dataset.originalText = _btn.textContent;
+            _btn.textContent = "Завантаження...";
+        }
+        
         try {
             // Добавляем ?_t=... чтобы сбросить кэш браузера!
             const response = await fetch(`${GOOGLE_SCRIPT_URL}?_t=${new Date().getTime()}`);
@@ -203,6 +211,11 @@ function doGet(e) {
             console.error("Ошибка сети:", err);
         }
         updateAvailability();
+        
+        if (_btn) {
+            _btn.disabled = false;
+            _btn.textContent = _btn.dataset.originalText || "Забронювати";
+        }
     }
 
     // ==========================================

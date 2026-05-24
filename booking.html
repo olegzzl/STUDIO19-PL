@@ -467,6 +467,15 @@
 
     // 2. Fetch Bookings from Google Sheets / Load Demo data
     async function loadBookings() {
+        const _submitBtn = document.getElementById('submit-btn');
+        const _submitBtnText = document.getElementById('submit-btn-text');
+        
+        if (_submitBtn) {
+            _submitBtn.disabled = true;
+            _submitBtn.classList.add('opacity-50', 'pointer-events-none');
+            _submitBtnText.textContent = "ЗАВАНТАЖЕННЯ ДАНИХ...";
+        }
+
         if (GOOGLE_SCRIPT_URL) {
             try {
                 // Добавляем временную метку (?_t=...), чтобы браузер не кэшировал данные и всегда брал свежую таблицу
@@ -510,6 +519,12 @@
             loadDemoBookings();
         }
         updateAvailability();
+        
+        if (_submitBtn) {
+            _submitBtn.disabled = false;
+            _submitBtn.classList.remove('opacity-50', 'pointer-events-none');
+            _submitBtnText.textContent = "Забронювати зараз";
+        }
     }
 
     function loadDemoBookings() {
