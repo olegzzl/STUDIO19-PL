@@ -168,15 +168,22 @@
 <nav class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="text-headline-xl font-headline-xl tracking-tighter uppercase text-primary dark:text-inverse-primary">STUDIO 19</div>
 <div class="hidden md:flex gap-10 items-center">
-<a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-300" href="index.html">Портфоліо</a>
+<a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-300" href="index.html">Головна</a>
 <a class="font-label-bold text-label-bold uppercase tracking-widest text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1" href="halls.html">Зали</a>
 <a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-300" href="equipment.html">Обладнання</a>
 <a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-300" href="equipment.html#rules">Правила</a>
 <a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors duration-300" href="booking.html#contacts">Контакти</a>
+<a href="tel:+380571234567" class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors flex items-center" title="Зателефонувати">
+<span class="material-symbols-outlined text-xl">call</span>
+</a>
 </div>
 <button class="hidden lg:block font-label-bold text-label-bold uppercase tracking-widest bg-primary text-white px-8 py-3 hover:bg-secondary transition-all duration-300" onclick="window.location.href='booking.html'">ЗАБРОНЮВАТИ</button>
+<div class="flex items-center gap-2">
+<a href="tel:+380571234567" class="md:hidden text-primary p-2 flex items-center hover:opacity-70 transition-opacity" title="Зателефонувати">
+<span class="material-symbols-outlined text-3xl">call</span>
+</a>
 <button class="md:hidden text-primary p-2 flex items-center hover:opacity-70 transition-opacity" onclick="toggleMobileMenu()"><span class="material-symbols-outlined text-3xl">menu</span></button>
-
+</div>
 </nav>
 </header>
 <main class="pt-48">
@@ -393,11 +400,12 @@
         <button onclick="toggleMobileMenu()" class="text-primary p-2"><span class="material-symbols-outlined text-3xl">close</span></button>
     </div>
     <div class="flex flex-col gap-6 text-xl font-bold uppercase tracking-widest text-primary">
-        <a href="index.html">Портфоліо</a>
+        <a href="index.html">Головна</a>
         <a href="halls.html">Зали</a>
         <a href="equipment.html">Обладнання</a>
         <a href="equipment.html#rules" onclick="toggleMobileMenu()">Правила</a>
         <a href="booking.html#contacts" onclick="toggleMobileMenu()">Контакти</a>
+        <a href="tel:+380571234567" class="flex items-center gap-2 text-xl font-bold uppercase tracking-widest text-secondary hover:text-primary"><span class="material-symbols-outlined text-2xl">call</span> Подзвонити</a>
     </div>
     <div class="mt-auto">
         <button class="w-full bg-primary text-on-primary py-5 font-bold uppercase tracking-widest" onclick="window.location.href='booking.html'">ЗАБРОНЮВАТИ</button>

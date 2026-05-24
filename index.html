@@ -166,19 +166,31 @@
         STUDIO 19
     </h1>
 </div>
-<!-- TopAppBar -->
+<script>
+    if (sessionStorage.getItem('loaded') === 'true') {
+        document.getElementById('loader').style.display = 'none';
+    }
+</script>
 <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-sm border-b border-primary/10">
 <nav class="flex justify-between items-center w-full px-margin-desktop py-unit max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 <a class="text-headline-xl font-headline-xl tracking-tighter uppercase text-primary cinematic-entrance inline-block" href="index.html">STUDIO 19</a>
 <div class="hidden md:flex gap-gutter items-center">
-<a class="font-label-bold text-label-bold uppercase tracking-widest text-primary nav-link-hover" href="index.html">Портфоліо</a>
+<a class="font-label-bold text-label-bold uppercase tracking-widest text-primary nav-link-hover" href="index.html">Головна</a>
 <a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="halls.html">Зали</a>
 <a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="equipment.html">Обладнання</a>
 <a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="equipment.html#rules">Правила</a>
 <a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="booking.html#contacts">Контакти</a>
+<a href="tel:+380571234567" class="text-secondary hover:text-primary transition-colors flex items-center" title="Зателефонувати">
+<span class="material-symbols-outlined text-xl">call</span>
+</a>
 </div>
 <button class="hidden md:block bg-primary text-on-primary px-6 py-2 font-label-bold text-label-bold uppercase hover:bg-secondary hover:scale-105 active:scale-95 transition-all duration-300" onclick="window.location.href='booking.html'">ЗАБРОНЮВАТИ</button>
+<div class="flex items-center gap-2">
+<a href="tel:+380571234567" class="md:hidden text-primary p-2 flex items-center hover:opacity-70 transition-opacity" title="Зателефонувати">
+<span class="material-symbols-outlined text-3xl">call</span>
+</a>
 <button class="md:hidden text-primary p-2 flex items-center hover:opacity-70 transition-opacity" onclick="toggleMobileMenu()"><span class="material-symbols-outlined text-3xl">menu</span></button>
+</div>
 </nav>
 </header>
 <main class="pt-40">
@@ -278,14 +290,19 @@
 <script>
     window.addEventListener('DOMContentLoaded', () => {
         const loader = document.getElementById('loader');
-        setTimeout(() => {
-            loader.style.opacity = '0';
+        if (sessionStorage.getItem('loaded') === 'true') {
+            loader.style.display = 'none';
+            revealElements();
+        } else {
+            sessionStorage.setItem('loaded', 'true');
             setTimeout(() => {
-                loader.style.display = 'none';
-                // Trigger initial animations for elements already in view
-                revealElements();
-            }, 1000);
-        }, 1200);
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    revealElements();
+                }, 1000);
+            }, 1200);
+        }
     });
 
     const observerOptions = {
@@ -331,11 +348,12 @@
         <button onclick="toggleMobileMenu()" class="text-primary p-2"><span class="material-symbols-outlined text-3xl">close</span></button>
     </div>
     <div class="flex flex-col gap-6 text-xl font-bold uppercase tracking-widest text-primary">
-        <a href="index.html">Портфоліо</a>
+        <a href="index.html">Головна</a>
         <a href="halls.html">Зали</a>
         <a href="equipment.html">Обладнання</a>
         <a href="equipment.html#rules" onclick="toggleMobileMenu()">Правила</a>
         <a href="booking.html#contacts" onclick="toggleMobileMenu()">Контакти</a>
+        <a href="tel:+380571234567" class="flex items-center gap-2 text-xl font-bold uppercase tracking-widest text-secondary hover:text-primary"><span class="material-symbols-outlined text-2xl">call</span> Подзвонити</a>
     </div>
     <div class="mt-auto">
         <button class="w-full bg-primary text-on-primary py-5 font-bold uppercase tracking-widest" onclick="window.location.href='booking.html'">ЗАБРОНЮВАТИ</button>
