@@ -467,7 +467,26 @@
                 // Добавляем временную метку (?_t=...), чтобы браузер не кэшировал данные и всегда брал свежую таблицу
                 const response = await fetch(`${GOOGLE_SCRIPT_URL}?_t=${new Date().getTime()}`);
                 if (response.ok) {
-                    bookings = await response.json();
+                    const rawData = await response.json();
+                    
+                    // ХАК ДЛЯ СТАРОГО GOOGLE СКРИПТА: Нормалізуємо криві дати та час на стороні клієнта
+                    bookings = rawData.map(b => {
+                        let nDate = b.date;
+                        if (b.date && String(b.date).includes("T")) {
+                            const d = new Date(b.date);
+                            if (!isNaN(d)) {
+                                nDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+                            }
+                        }
+                        let nTime = b.time;
+                        if (b.time && String(b.time).includes("GMT")) {
+                            const t = new Date(b.time);
+                            if (!isNaN(t)) {
+                                nTime = `${String(t.getHours()).padStart(2, '0')}:${String(t.getMinutes()).padStart(2, '0')}`;
+                            }
+                        }
+                        return { ...b, date: nDate, time: nTime };
+                    });
                 } else {
                     console.warn("Could not load bookings from Google Script. Using offline mode.");
                     loadDemoBookings();
@@ -594,19 +613,20 @@
             submitBtnText.textContent = "БРОНЮВАННЯ...";
             
             if (GOOGLE_SCRIPT_URL) {
-                const formData = new URLSearchParams();
-                formData.append('name', name);
-                formData.append('phone', phone);
-                formData.append('hall', selectedHall);
-                formData.append('date', selectedDate);
-                formData.append('time', selectedTime);
+                const payload = {
+                    name: name,
+                    phone: phone,
+                    hall: selectedHall,
+                    date: selectedDate,
+                    time: selectedTime
+                };
                 
                 try {
                     const response = await fetch(GOOGLE_SCRIPT_URL, {
                         method: 'POST',
-                        body: formData,
+                        body: JSON.stringify(payload),
                         headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
+                            'Content-Type': 'text/plain;charset=utf-8' // Використовуємо text/plain для JSON, щоб уникнути CORS в Google Scripts
                         }
                     });
                     
