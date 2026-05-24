@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="uk"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>STUDIO 19 | Фотостудія Харків</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @font-face {
+            font-family: 'Helvetica';
+            src: local('Helvetica'), local('Arial');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-zoom {
+            animation: slowZoom 20s ease-out forwards;
+            will-change: transform;
+        }
+        @keyframes slowZoom {
+            from { transform: scale(1.15) grayscale(100%); }
+            to { transform: scale(1) grayscale(100%); }
+        }
+        /* Cinematic Reveal effect */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            transition: opacity 1.2s cubic-bezier(0.2, 0, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0, 0.2, 1);
+            will-change: opacity, transform;
+        }
+        .reveal-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        @keyframes cinematicLogo {
+            0% { opacity: 0; letter-spacing: -0.1em; transform: translateY(20px); }
+            100% { opacity: 1; letter-spacing: -0.05em; transform: translateY(0); }
+        }
+        .cinematic-entrance {
+            opacity: 0;
+            animation: cinematicLogo 1.8s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+            animation-delay: 0.5s;
+        }
+        .grayscale-img {
+            filter: grayscale(100%) contrast(110%);
+        }
+        /* Nav link interaction */
+        .nav-link-hover {
+            position: relative;
+            transition: letter-spacing 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link-hover:hover {
+            letter-spacing: 0.15em;
+        }
+        .nav-link-hover::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link-hover:hover::after {
+            width: 100%;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "secondary": "#5e5e5e",
+                "primary-fixed-dim": "#c6c6c6",
+                "surface-tint": "#5e5e5e",
+                "outline-variant": "#cfc4c5",
+                "surface-variant": "#e2e2e2",
+                "outline": "#7e7576",
+                "surface-bright": "#f9f9f9",
+                "surface": "#f9f9f9",
+                "tertiary-fixed-dim": "#c6c6c6",
+                "on-tertiary-fixed-variant": "#474747",
+                "secondary-fixed": "#e4e2e2",
+                "inverse-primary": "#c6c6c6",
+                "secondary-container": "#e1dfdf",
+                "error": "#ba1a1a",
+                "on-error-container": "#93000a",
+                "on-surface": "#1a1c1c",
+                "surface-container-highest": "#e2e2e2",
+                "on-surface-variant": "#4c4546",
+                "on-primary": "#ffffff",
+                "primary-fixed": "#e2e2e2",
+                "inverse-surface": "#2f3131",
+                "surface-container-lowest": "#ffffff",
+                "primary": "#000000",
+                "surface-container-high": "#e8e8e8",
+                "surface-container": "#eeeeee",
+                "on-primary-fixed": "#1b1b1b",
+                "on-tertiary-fixed": "#1b1b1b",
+                "on-primary-container": "#848484",
+                "on-error": "#ffffff",
+                "surface-container-low": "#f3f3f3",
+                "surface-dim": "#dadada",
+                "on-tertiary-container": "#848484",
+                "primary-container": "#1b1b1b",
+                "tertiary-container": "#1b1b1b",
+                "on-secondary-fixed": "#1b1c1c",
+                "on-secondary-container": "#626262",
+                "on-tertiary": "#ffffff",
+                "on-secondary": "#ffffff",
+                "error-container": "#ffdad6",
+                "on-background": "#1a1c1c",
+                "inverse-on-surface": "#f1f1f1",
+                "on-primary-fixed-variant": "#474747",
+                "background": "#f9f9f9",
+                "secondary-fixed-dim": "#c7c6c6",
+                "tertiary": "#000000",
+                "on-secondary-fixed-variant": "#464747",
+                "tertiary-fixed": "#e2e2e2"
+            },
+            "borderRadius": {
+                "DEFAULT": "0px",
+                "lg": "0px",
+                "xl": "0px",
+                "full": "9999px"
+            },
+            "spacing": {
+                "margin-mobile": "24px",
+                "gutter": "32px",
+                "unit": "8px",
+                "margin-desktop": "64px",
+                "container-max": "1280px",
+                "section-gap": "160px"
+            },
+            "fontFamily": {
+                "headline-xl": ["Helvetica", "Inter", "sans-serif"],
+                "headline-md": ["Helvetica", "Inter", "sans-serif"],
+                "display-lg": ["Helvetica", "Inter", "sans-serif"],
+                "body-lg": ["Helvetica", "Inter", "sans-serif"],
+                "body-md": ["Helvetica", "Inter", "sans-serif"],
+                "label-bold": ["Helvetica", "Inter", "sans-serif"]
+            },
+            "fontSize": {
+                "display-lg": ["clamp(40px, 8vw, 84px)", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                "headline-xl": ["clamp(32px, 5vw, 48px)", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                "headline-md": ["clamp(24px, 4vw, 28px)", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "label-bold": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-primary font-body-md selection:bg-primary selection:text-on-primary overflow-x-hidden">
+<!-- Loading Screen -->
+<div class="fixed inset-0 z-[100] bg-background flex items-center justify-center pointer-events-none transition-opacity duration-1000" id="loader">
+<h1 class="font-headline-xl text-headline-xl uppercase tracking-widest text-primary opacity-0 cinematic-entrance">
+        STUDIO 19
+    </h1>
+</div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-sm border-b border-primary/10">
+<nav class="flex justify-between items-center w-full px-margin-desktop py-unit max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<a class="text-headline-xl font-headline-xl tracking-tighter uppercase text-primary cinematic-entrance inline-block" href="index.html">STUDIO 19</a>
+<div class="hidden md:flex gap-gutter items-center">
+<a class="font-label-bold text-label-bold uppercase tracking-widest text-primary nav-link-hover" href="index.html">Портфоліо</a>
+<a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="halls.html">Зали</a>
+<a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="equipment.html">Обладнання</a>
+<a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="equipment.html#rules">Правила</a>
+<a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="booking.html#contacts">Контакти</a>
+</div>
+<button class="hidden md:block bg-primary text-on-primary px-6 py-2 font-label-bold text-label-bold uppercase hover:bg-secondary hover:scale-105 active:scale-95 transition-all duration-300" onclick="window.location.href='booking.html'">ЗАБРОНЮВАТИ</button>
+<button class="md:hidden text-primary p-2 flex items-center" onclick="toggleMobileMenu()"><span class="material-symbols-outlined text-3xl">menu</span></button>
+</nav>
+</header>
+<main class="pt-40">
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-section-gap">
+<div class="grid grid-cols-12 items-end gap-gutter">
+<div class="col-span-12 md:col-span-8 mb-12 md:mb-0">
+<div class="overflow-hidden bg-black">
+<img alt="Професійна фотостудія" class="w-full aspect-[4/5] md:aspect-[16/10] object-cover hero-zoom grayscale-img" id="hero-parallax-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFjFxjCgQdo2YI4IP-mcG9JiXAvn4ZTSMXnVR2vuo6LXkM7rd-czLThrhZovq6S8ZHEcB5nIS_N4yiZPJMJldzJYxlzdO0lSNmho_lKiXYhqr77B24eZLh5XsjrXsu3nMq1N7OF2IX5ZpY79Wg4EMaee7o_s6xenPtq766SZ3x5oTbVn9OPoXm5F5FkuKEG_W3bZ6NoofmYzwMGgmbSmIUmDln2DvxXP9kbNjaXjF1xnNjXYIPq_GpboKs5TRa3Qlb90FdopVsEzj2"/>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 flex flex-col items-start pb-4">
+<span class="font-label-bold text-label-bold uppercase tracking-widest text-on-surface-variant mb-4 reveal-on-scroll">ХАРКІВ / ВУЛ. СУМСЬКА 1</span>
+<h2 class="font-headline-xl text-headline-xl mb-8 font-bold uppercase leading-tight reveal-on-scroll" style="transition-delay: 0.1s;">Мистецтво крізь<br/>об'єктив.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[320px] mb-12 reveal-on-scroll" style="transition-delay: 0.2s;">
+                    Харків, вул. Сумська 1 (метро Історичний музей, під "Градусником"). Мінімалізм, професійне світло та естетика Пітера Ліндберга. 
+                </p>
+<a class="bg-primary text-on-primary px-10 py-5 font-label-bold text-label-bold uppercase hover:bg-secondary hover:scale-105 active:scale-95 transition-all duration-500 reveal-on-scroll" href="booking.html" style="transition-delay: 0.3s;">
+                    Забронювати
+                </a>
+</div>
+</div>
+</section>
+<!-- Halls Overview -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-section-gap reveal-on-scroll">
+<div class="flex flex-col md:flex-row justify-between items-baseline mb-16 gap-4 border-b border-primary pb-8">
+<h3 class="font-headline-xl text-headline-xl font-bold uppercase">Зали</h3>
+<p class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-widest">Локації для ваших ідей</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Hall 1 -->
+<div class="md:col-span-7 reveal-on-scroll">
+<div class="group cursor-pointer overflow-hidden mb-6 relative bg-black transform transition-transform duration-700 hover:-translate-y-4">
+<img class="w-full aspect-[4/3] object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASPEmBGVXVlr1yTrMFTMIFhbvbvaI16r8CWZlzbIzci1NwYIS3oBQAXLzDiP1KzAouv3Qdj-vZkBiK4eYjAIwfUv84ZxkgoHVB8VZtuGURPLW8VLwCt68dRT2CLPPe0HuP5PSoHlJXWsTTgEIeXNhB_TgcZVT_TsZm-bkZXt85LHODE2VGsFoou5_ZsrjICTg47Dm-RH7ON26AQqX2D6VAlAnOjFJEtQwc1zstmOBtw871xzo0YwzcFyzyeqcTXVCj7QgSs283ol6S"/>
+</div>
+<div class="flex justify-between items-center">
+<h4 class="font-headline-md text-headline-md font-bold uppercase">Зала Один: The Void</h4>
+<span class="font-label-bold text-label-bold text-on-surface-variant">120м² / 800 UAH/год</span>
+</div>
+</div>
+<!-- Hall 2 -->
+<div class="md:col-span-5 md:mt-32 reveal-on-scroll" style="transition-delay: 0.2s;">
+<div class="group cursor-pointer overflow-hidden mb-6 relative bg-black transform transition-transform duration-700 hover:-translate-y-4">
+<img class="w-full aspect-[4/5] object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvEod9i8R-ek7B_YC7IdDxVFS7qDWI8odg3r0tyOEgaXM_K51O4t38gpHMIqcZeR2UuUlWaXgft7S2ypKtuMoPPiBzwNiYkhj3lFcRJ_iS4ZdhVlefFKnvDIQulsbjZ_Y7SpEEZ2oAKtAXFCcg8SwkJDoU1gUu7hdqx2378K7dxtVBz89X9ZSzwqNoA8-CY1YUCG-HExMkF5SY2crmSbwmZGRdrR3fmu-OA83g-NrBq493NcNaQ-k16Uz_Bw1PTa7VFzDYFiA3rGq3"/>
+</div>
+<div class="flex justify-between items-center">
+<h4 class="font-headline-md text-headline-md font-bold uppercase">Зала Два: Texture</h4>
+<span class="font-label-bold text-label-bold text-on-surface-variant">85м² / 800 UAH/год</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="bg-primary text-on-primary py-section-gap overflow-hidden reveal-on-scroll">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<div class="md:col-span-4 reveal-on-scroll">
+<span class="font-label-bold text-label-bold uppercase tracking-widest text-on-primary/60 block mb-8">Відгуки</span>
+<h3 class="font-headline-xl text-headline-xl font-bold uppercase leading-tight">Естетика,<br/>що надихає.</h3>
+</div>
+<div class="md:col-span-7 md:col-start-6 space-y-24">
+<blockquote class="reveal-on-scroll" style="transition-delay: 0.3s;">
+<p class="font-headline-md text-headline-md mb-8 leading-relaxed">«Найкраще світло, з яким мені доводилося працювати в Харкові. Простір буквально дихає кінематографічністю.»</p>
+<cite class="font-label-bold text-label-bold not-italic uppercase tracking-widest text-on-primary/60">— Олена В., Fashion Фотограф</cite>
+</blockquote>
+</div>
+</div>
+</div>
+</section>
+<!-- Booking CTA -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap text-center reveal-on-scroll" id="booking">
+<div class="max-w-[800px] mx-auto">
+<h2 class="font-display-lg text-display-lg mb-12 uppercase font-bold reveal-on-scroll">Створіть свій<br/>шедевр.</h2>
+<p class="font-body-lg text-body-lg mb-12 text-on-surface-variant reveal-on-scroll" style="transition-delay: 0.1s;">Харків, вул. Сумська 1 | 9:00 – 18:00 | 800 UAH/год</p>
+<div class="flex flex-col md:flex-row gap-gutter justify-center items-center reveal-on-scroll" style="transition-delay: 0.2s;">
+<a class="font-label-bold text-label-bold uppercase tracking-widest border border-primary px-12 py-6 hover:bg-primary hover:text-on-primary hover:scale-105 active:scale-95 transition-all duration-500 w-full md:w-auto" href="booking.html">Бронювання онлайн</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary text-on-primary border-t border-primary reveal-on-scroll">
+<div class="max-w-container-max mx-auto px-margin-desktop py-12 flex flex-col md:flex-row justify-between items-center gap-gutter px-margin-mobile md:px-margin-desktop">
+<div class="flex flex-col gap-4">
+<a class="font-headline-md text-headline-md text-on-primary uppercase font-bold hover:tracking-widest transition-all duration-700" href="index.html">STUDIO 19</a>
+<p class="font-body-md text-body-md opacity-70">Харків, вул. Сумська 1 (метро Історичний музей, під "Градусником")</p>
+</div>
+<div class="flex gap-8">
+<a class="font-label-bold text-label-bold uppercase text-primary-fixed-dim opacity-70 hover:opacity-100 transition-opacity nav-link-hover" href="#">Instagram</a>
+<a class="font-label-bold text-label-bold uppercase text-primary-fixed-dim opacity-70 hover:opacity-100 transition-opacity nav-link-hover" href="#">Facebook</a>
+<a class="font-label-bold text-label-bold uppercase text-primary-fixed-dim opacity-70 hover:opacity-100 transition-opacity nav-link-hover" href="#">Політика конфіденційності</a>
+</div>
+<div class="text-right">
+<p class="font-body-md text-body-md">© 2026 STUDIO 19. Харків, Сумська 1. 800 UAH/год. 9:00 - 18:00.</p>
+</div>
+</div>
+</footer>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const loader = document.getElementById('loader');
+        setTimeout(() => {
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+                // Trigger initial animations for elements already in view
+                revealElements();
+            }, 1000);
+        }, 1200);
+    });
+
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const revealElements = () => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // We can unobserve if we only want it to reveal once
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+    };
+
+    // Parallax & Subtle Zoom on Scroll
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const heroImg = document.getElementById('hero-parallax-img');
+        
+        if(heroImg) {
+            // Subtle zoom and slow movement
+            const scale = 1 + scrolled * 0.00005;
+            const translate = scrolled * 0.05;
+            heroImg.style.transform = `scale(${scale}) translateY(${translate}px)`;
+        }
+    });
+
+    // Run reveal logic
+    revealElements();
+</script>
+
+<!-- Mobile Menu Drawer -->
+<div id="mobile-menu" class="fixed inset-0 bg-surface z-[100] transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col px-margin-mobile py-8 md:hidden">
+    <div class="flex justify-between items-center mb-12">
+        <a href="index.html" class="text-3xl font-bold uppercase tracking-tighter text-primary">STUDIO 19</a>
+        <button onclick="toggleMobileMenu()" class="text-primary p-2"><span class="material-symbols-outlined text-3xl">close</span></button>
+    </div>
+    <div class="flex flex-col gap-6 text-xl font-bold uppercase tracking-widest text-primary">
+        <a href="index.html" onclick="toggleMobileMenu()">Портфоліо</a>
+        <a href="halls.html" onclick="toggleMobileMenu()">Зали</a>
+        <a href="equipment.html" onclick="toggleMobileMenu()">Обладнання</a>
+        <a href="equipment.html#rules" onclick="toggleMobileMenu()">Правила</a>
+        <a href="booking.html#contacts" onclick="toggleMobileMenu()">Контакти</a>
+    </div>
+    <div class="mt-auto">
+        <button class="w-full bg-primary text-on-primary py-5 font-bold uppercase tracking-widest" onclick="window.location.href='booking.html'">ЗАБРОНЮВАТИ</button>
+    </div>
+</div>
+
+
+<script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        if (menu.classList.contains('translate-x-full')) {
+            menu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
+        } else {
+            menu.classList.add('translate-x-full');
+            document.body.style.overflow = '';
+        }
+    }
+</script>
+
+</body></html>

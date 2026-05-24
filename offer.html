@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-white text-black p-10 max-w-2xl mx-auto overflow-x-hidden">
+    <header class="mb-12">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgKSMppLbBXCZ9r4KntsAKB5QXtl9KnpUuiGvUW0AONws69JFEwDPXM5EsXA_Ac0F6rHUSeLPkC0XuLxexf4rvi7rC_lLczQH1Z2wv8AFnyUQQcNUeAi0RdolCxZ3JV5V2uJN8Qk8GmTpY6nLIsgArG5HWlZ8U4E-qbtr3PzQFtiQpfQtl_IMvrD-Kn4bi0kFMJdpGAkrA4V0Hmmidlb-9VNU92Nob0ZEgjBp9rnUPHUDiGvxcR78hb-pDO1SM50lcWNCAdFL_MSy-" alt="STUDIO 19 Header" class="w-full h-auto mb-8 grayscale">
+        <h1 class="text-5xl font-bold tracking-tighter uppercase mb-4">Мистецтво крізь об'єктив.</h1>
+        <p class="text-xl text-zinc-500 max-w-lg">Простір у центрі Харкова, де світло і тінь створюють вашу історію. Мінімалізм як філософія, якість як стандарт.</p>
+    </header>
+
+    <section class="mb-12 border-t border-black pt-8">
+        <h2 class="text-sm font-bold uppercase tracking-widest mb-6 text-zinc-400">Пропозиція місяця</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <h3 class="text-2xl font-bold mb-2">Локація "The Void"</h3>
+                <p class="text-zinc-600 mb-4">120 м² чистої естетики. Панорамні вікна та професійне освітлення Profoto.</p>
+                <p class="text-lg font-bold">800 UAH / година</p>
+            </div>
+            <div class="flex items-center justify-center border border-black p-4">
+                <p class="text-center font-bold uppercase text-xs tracking-widest">Знижка 15% при бронюванні від 5 годин</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-12 bg-black text-white p-8">
+        <h2 class="text-3xl font-bold tracking-tighter mb-4">ГОТОВІ СТВОРИТИ ШЕДЕВР?</h2>
+        <p class="text-zinc-400 mb-6">Забронюйте свій час у STUDIO 19 сьогодні.</p>
+        <a href="#" class="inline-block bg-white text-black px-8 py-3 font-bold uppercase text-sm tracking-widest">Забронювати онлайн</a>
+    </section>
+
+    <footer class="text-xs text-zinc-400 border-t border-zinc-100 pt-8 flex justify-between items-center">
+        <div>
+            <p class="font-bold text-black text-sm mb-1 uppercase">STUDIO 19</p>
+            <p>Харків, вул. Сумська 1</p>
+            <p>Пн-Нд: 9:00 — 18:00</p>
+        </div>
+        <div class="text-right">
+            <p>&copy; 2026 STUDIO 19. All rights reserved.</p>
+        </div>
+    </footer>
+
+<!-- Mobile Menu Drawer -->
+<div id="mobile-menu" class="fixed inset-0 bg-surface z-[100] transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col px-margin-mobile py-8 md:hidden">
+    <div class="flex justify-between items-center mb-12">
+        <a href="index.html" class="text-3xl font-bold uppercase tracking-tighter text-primary">STUDIO 19</a>
+        <button onclick="toggleMobileMenu()" class="text-primary p-2"><span class="material-symbols-outlined text-3xl">close</span></button>
+    </div>
+    <div class="flex flex-col gap-6 text-xl font-bold uppercase tracking-widest text-primary">
+        <a href="index.html" onclick="toggleMobileMenu()">Портфоліо</a>
+        <a href="halls.html" onclick="toggleMobileMenu()">Зали</a>
+        <a href="equipment.html" onclick="toggleMobileMenu()">Обладнання</a>
+        <a href="equipment.html#rules" onclick="toggleMobileMenu()">Правила</a>
+        <a href="booking.html#contacts" onclick="toggleMobileMenu()">Контакти</a>
+    </div>
+    <div class="mt-auto">
+        <button class="hidden md:block w-full bg-primary text-on-primary py-5 font-bold uppercase tracking-widest" onclick="window.location.href='booking.html'">ЗАБРОНЮВАТИ</button>
+<button class="md:hidden text-primary p-2 flex items-center" onclick="toggleMobileMenu()"><span class="material-symbols-outlined text-3xl">menu</span></button>
+    </div>
+</div>
+
+
+<script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        if (menu.classList.contains('translate-x-full')) {
+            menu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
+        } else {
+            menu.classList.add('translate-x-full');
+            document.body.style.overflow = '';
+        }
+    }
+</script>
+
+</body>
+</html>
