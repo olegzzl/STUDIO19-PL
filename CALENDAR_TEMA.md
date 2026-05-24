@@ -99,9 +99,14 @@ function doGet(e) {
 
     let bookings = [];
     let selectedHall = "Зал 1";
-    let selectedDate = "2026-10-01"; // Стартовая дата (можно ставить динамически)
+    
+    // Инициализация актуальной даты
+    const _today = new Date();
+    const _todayStr = `${_today.getFullYear()}-${String(_today.getMonth() + 1).padStart(2, '0')}-${String(_today.getDate()).padStart(2, '0')}`;
+    
+    let selectedDate = _todayStr; // Стартовая дата (текущий день)
     let selectedTime = null;         
-    let currentDate = new Date(2026, 9, 1); // Стартовый месяц календаря (Октябрь 2026: месяц 9, так как счет с 0)
+    let currentDate = new Date(_today.getFullYear(), _today.getMonth(), 1); // Текущий месяц календаря
 
     // Привязка элементов (замените ID на свои, если меняете HTML)
     const calendarContainer = document.getElementById('calendar-container');

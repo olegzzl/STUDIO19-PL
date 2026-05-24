@@ -375,11 +375,16 @@
     // Application state
     let bookings = [];
     let selectedHall = "Зал \"Symmetry\" (120м²)";
-    let selectedDate = "2026-10-03"; // Default initial day matching style (October 3rd, 2026)
-    let selectedTime = "14:00";      // Default initial time slot
     
-    // We initialize currentDate to October 1st, 2026
-    let currentDate = new Date(2026, 9, 1); 
+    // Initialize date variables dynamically to today's date
+    const _today = new Date();
+    const _todayStr = `${_today.getFullYear()}-${String(_today.getMonth() + 1).padStart(2, '0')}-${String(_today.getDate()).padStart(2, '0')}`;
+    
+    let selectedDate = _todayStr; 
+    let selectedTime = null; 
+    
+    // Set current month for the calendar
+    let currentDate = new Date(_today.getFullYear(), _today.getMonth(), 1); 
 
     // DOM Elements
     const calendarContainer = document.getElementById('calendar-container');
