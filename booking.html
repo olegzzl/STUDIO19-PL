@@ -464,7 +464,8 @@
     async function loadBookings() {
         if (GOOGLE_SCRIPT_URL) {
             try {
-                const response = await fetch(GOOGLE_SCRIPT_URL);
+                // Добавляем временную метку (?_t=...), чтобы браузер не кэшировал данные и всегда брал свежую таблицу
+                const response = await fetch(`${GOOGLE_SCRIPT_URL}?_t=${new Date().getTime()}`);
                 if (response.ok) {
                     bookings = await response.json();
                 } else {
