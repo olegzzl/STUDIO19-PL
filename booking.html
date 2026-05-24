@@ -148,6 +148,14 @@
                         "body-lg": ["Inter", "Helvetica", "Arial", "sans-serif"],
                         "label-bold": ["Inter", "Helvetica", "Arial", "sans-serif"],
                         "body-md": ["Inter", "Helvetica", "Arial", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["clamp(40px, 8vw, 84px)", {"lineHeight": "0.95", "letterSpacing": "-0.05em", "fontWeight": "800"}],
+                        "headline-xl": ["clamp(32px, 5vw, 48px)", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "headline-md": ["clamp(24px, 4vw, 28px)", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["20px", {"lineHeight": "1.5", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-bold": ["13px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "700"}]
                     }
                 },
             },
@@ -165,9 +173,9 @@
 <a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors duration-150" href="equipment.html">Обладнання</a>
 <a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors duration-150" href="equipment.html#rules">Правила</a>
 <a class="font-label-bold text-label-bold uppercase tracking-widest text-primary border-b-2 border-primary pb-1" href="booking.html#contacts">Контакти</a>
-<button class="hidden md:block ml-4 px-6 py-2 bg-primary text-on-primary font-label-bold uppercase tracking-widest hover:bg-secondary transition-all active:scale-95 duration-200" onclick="window.location.href='booking.html'">ЗАБРОНЮВАТИ</button>
-<button class="text-primary p-2 flex items-center hover:opacity-70 transition-opacity" onclick="toggleMobileMenu()"><span class="material-symbols-outlined text-3xl">menu</span></button>
 </div>
+<button class="hidden md:block ml-4 px-6 py-2 bg-primary text-on-primary font-label-bold uppercase tracking-widest hover:bg-secondary transition-all active:scale-95 duration-200" onclick="window.location.href='booking.html'">ЗАБРОНЮВАТИ</button>
+<button class="md:hidden text-primary p-2 flex items-center hover:opacity-70 transition-opacity" onclick="toggleMobileMenu()"><span class="material-symbols-outlined text-3xl">menu</span></button>
 
 </div>
 </nav>
@@ -269,7 +277,7 @@
 </form>
 </div>
 <!-- Right: Information & Map -->
-<div id="contacts" class="col-span-12 lg:col-span-4 lg:col-start-9 space-y-24 scroll-mt-32">
+<div id="contacts" class="col-span-12 lg:col-span-4 lg:col-start-9 space-y-24 scroll-mt-[72px] lg:scroll-mt-[88px]">
 <div class="space-y-12">
 <div>
 <p class="font-black text-xs uppercase tracking-widest mb-6">Адреса</p>
