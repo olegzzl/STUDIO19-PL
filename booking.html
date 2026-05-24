@@ -482,7 +482,13 @@
                         if (b.time && (String(b.time).includes("GMT") || String(b.time).includes("T"))) {
                             const t = new Date(b.time);
                             if (!isNaN(t)) {
-                                nTime = `${String(t.getHours()).padStart(2, '0')}:${String(t.getMinutes()).padStart(2, '0')}`;
+                                let h = t.getHours();
+                                let m = t.getMinutes();
+                                // Округление для решения проблемы исторических часовых поясов (например, Safari возвращает 19:57 вместо 20:00)
+                                if (m > 45) { h = (h + 1) % 24; m = 0; }
+                                else if (m > 15 && m < 45) { m = 30; }
+                                else { m = 0; }
+                                nTime = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
                             }
                         }
                         return { ...b, date: nDate, time: nTime };
