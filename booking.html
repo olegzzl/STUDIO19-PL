@@ -231,17 +231,7 @@
 <div class="aspect-square flex items-center justify-center text-primary/20 text-sm font-bold">30</div>
 <!-- Days generated via script -->
 </div>
-<script>
-                        const calendarContainer = document.getElementById('calendar-container');
-                        for(let i = 1; i <= 31; i++) {
-                            const btn = document.createElement('button');
-                            btn.className = i === 3 
-                                ? "aspect-square flex items-center justify-center bg-primary text-on-primary font-black text-lg transition-all duration-300 transform active:scale-90" 
-                                : "aspect-square flex items-center justify-center border border-transparent hover:border-primary hover:scale-110 font-black text-lg transition-all duration-300 transform active:scale-90";
-                            btn.textContent = i;
-                            calendarContainer.appendChild(btn);
-                        }
-                    </script>
+<!-- Days generated dynamically at the end -->
 <div class="mt-16">
 <p class="font-black text-xs uppercase tracking-[0.2em] mb-8">Доступний час</p>
 <div class="grid grid-cols-3 md:grid-cols-6 gap-4" id="time-slots">
@@ -255,32 +245,34 @@
 </div>
 </div>
 <!-- Contact Details Form -->
-<form class="space-y-12">
+<form id="booking-form" class="space-y-12">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
 <div class="space-y-4">
 <label class="font-black text-xs uppercase tracking-widest opacity-50 transition-all duration-300">Ім'я</label>
 <div class="input-underline">
-<input class="w-full bg-transparent border-0 border-b-4 border-primary/20 focus:ring-0 focus:border-primary/20 py-4 px-0 font-black text-2xl uppercase placeholder:text-primary/10" placeholder="Олександр" type="text"/>
+<input id="client-name" required class="w-full bg-transparent border-0 border-b-4 border-primary/20 focus:ring-0 focus:border-primary/20 py-4 px-0 font-black text-2xl uppercase placeholder:text-primary/10" placeholder="Олександр" type="text"/>
 </div>
 </div>
 <div class="space-y-4">
 <label class="font-black text-xs uppercase tracking-widest opacity-50 transition-all duration-300">Телефон</label>
 <div class="input-underline">
-<input class="w-full bg-transparent border-0 border-b-4 border-primary/20 focus:ring-0 focus:border-primary/20 py-4 px-0 font-black text-2xl uppercase placeholder:text-primary/10" placeholder="+380 (00) 000-00-00" type="tel"/>
+<input id="client-phone" required class="w-full bg-transparent border-0 border-b-4 border-primary/20 focus:ring-0 focus:border-primary/20 py-4 px-0 font-black text-2xl uppercase placeholder:text-primary/10" placeholder="+380 (00) 000-00-00" type="tel"/>
 </div>
 </div>
 </div>
 <div class="space-y-4">
 <label class="font-black text-xs uppercase tracking-widest opacity-50 transition-all duration-300">Вибір залу</label>
 <div class="input-underline">
-<select class="w-full bg-transparent border-0 border-b-4 border-primary/20 focus:ring-0 focus:border-primary/20 py-4 px-0 font-black text-2xl uppercase appearance-none cursor-pointer">
+<select id="hall-select" class="w-full bg-transparent border-0 border-b-4 border-primary/20 focus:ring-0 focus:border-primary/20 py-4 px-0 font-black text-2xl uppercase appearance-none cursor-pointer">
 <option>Зал "Symmetry" (120м²)</option>
 <option>Зал "Shadows" (85м²)</option>
 <option>Зал "Morning" (150м²)</option>
 </select>
 </div>
 </div>
-<button class="w-full md:w-auto bg-primary text-on-primary px-16 py-6 font-black text-xl uppercase tracking-tighter hover:bg-secondary transition-all active:scale-95 duration-200" type="submit">Забронювати зараз</button>
+<button id="submit-btn" class="w-full md:w-auto bg-primary text-on-primary px-16 py-6 font-black text-xl uppercase tracking-tighter hover:bg-secondary transition-all active:scale-95 duration-200" type="submit">
+    <span id="submit-btn-text">Забронювати зараз</span>
+</button>
 </form>
 </div>
 <!-- Right: Information & Map -->
@@ -370,7 +362,286 @@
 </div>
 </footer>
 <script>
-    // High contrast input states & Label animation
+    // ==========================================
+    // GOOGLE SHEETS API CONFIGURATION
+    // Paste your Google Web App URL here!
+    // Format: "https://script.google.com/macros/s/.../exec"
+    // ==========================================
+    const GOOGLE_SCRIPT_URL = "";
+
+    // Application state
+    let bookings = [];
+    let selectedHall = "Зал \"Symmetry\" (120м²)";
+    let selectedDate = "2026-10-03"; // Default initial day matching style (October 3rd, 2026)
+    let selectedTime = "14:00";      // Default initial time slot
+
+    // DOM Elements
+    const calendarContainer = document.getElementById('calendar-container');
+    const hallSelect = document.getElementById('hall-select');
+    const bookingForm = document.getElementById('booking-form');
+    const clientNameInput = document.getElementById('client-name');
+    const clientPhoneInput = document.getElementById('client-phone');
+    const submitBtn = document.getElementById('submit-btn');
+    const submitBtnText = document.getElementById('submit-btn-text');
+    const timeSlots = document.querySelectorAll('#time-slots button');
+
+    // 1. Initialize Calendar Days (1-31 Oct 2026)
+    function initCalendar() {
+        if (!calendarContainer) return;
+        
+        // Clear dynamically generated section
+        calendarContainer.innerHTML = '';
+        
+        // Empty space for previous month placeholder (30 Sep)
+        const emptyCell = document.createElement('div');
+        emptyCell.className = "aspect-square flex items-center justify-center text-primary/20 text-sm font-bold";
+        emptyCell.textContent = "30";
+        calendarContainer.appendChild(emptyCell);
+        
+        // Loop to generate 31 days of October 2026
+        for(let i = 1; i <= 31; i++) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.dataset.day = i;
+            
+            const dateStr = `2026-10-${String(i).padStart(2, '0')}`;
+            
+            // Initial styling: October 3rd starts active as styled previously
+            if (dateStr === selectedDate) {
+                btn.className = "aspect-square flex items-center justify-center bg-primary text-on-primary font-black text-lg transition-all duration-300 transform active:scale-90 day-btn";
+            } else {
+                btn.className = "aspect-square flex items-center justify-center border border-transparent hover:border-primary hover:scale-110 font-black text-lg transition-all duration-300 transform active:scale-90 day-btn";
+            }
+            
+            btn.textContent = i;
+            
+            btn.addEventListener('click', () => {
+                selectedDate = dateStr;
+                
+                // Update day button visual active state
+                document.querySelectorAll('.day-btn').forEach(b => {
+                    b.classList.remove('bg-primary', 'text-on-primary');
+                    b.classList.add('border-transparent');
+                });
+                btn.classList.add('bg-primary', 'text-on-primary');
+                btn.classList.remove('border-transparent');
+                
+                updateAvailability();
+            });
+            
+            calendarContainer.appendChild(btn);
+        }
+    }
+
+    // 2. Fetch Bookings from Google Sheets / Load Demo data
+    async function loadBookings() {
+        if (GOOGLE_SCRIPT_URL) {
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL);
+                if (response.ok) {
+                    bookings = await response.json();
+                } else {
+                    console.warn("Could not load bookings from Google Script. Using offline mode.");
+                    loadDemoBookings();
+                }
+            } catch (err) {
+                console.error("Connection error to Google Sheets API:", err);
+                loadDemoBookings();
+            }
+        } else {
+            loadDemoBookings();
+        }
+        updateAvailability();
+    }
+
+    function loadDemoBookings() {
+        // Pre-fill some mock bookings to show calendar interactivity offline
+        bookings = [
+            { date: "2026-10-03", time: "10:00", hall: "Зал \"Symmetry\" (120м²)" },
+            { date: "2026-10-03", time: "14:00", hall: "Зал \"Symmetry\" (120м²)" },
+            { date: "2026-10-15", time: "12:00", hall: "Зал \"Shadows\" (85м²)" },
+            { date: "2026-10-15", time: "14:00", hall: "Зал \"Shadows\" (85м²)" },
+            { date: "2026-10-20", time: "18:00", hall: "Зал \"Morning\" (150м²)" }
+        ];
+    }
+
+    // 3. Update Available/Occupied slots dynamically based on Hall and Date
+    function updateAvailability() {
+        let firstAvailableTime = null;
+        
+        timeSlots.forEach(slot => {
+            const slotTime = slot.textContent.trim();
+            
+            // Check if slot is already occupied
+            const isBooked = bookings.some(b => 
+                b.date === selectedDate && 
+                b.time === slotTime && 
+                b.hall === selectedHall &&
+                String(b.status || "Підтверджено").toLowerCase() !== "скасовано"
+            );
+            
+            if (isBooked) {
+                // Disable booked time slot button
+                slot.className = "py-4 bg-gray-100 text-primary/20 border border-dashed border-primary/20 pointer-events-none line-through font-bold transform active:scale-95 transition-all duration-300";
+                
+                // If currently selected time was booked, unselect it
+                if (selectedTime === slotTime) {
+                    selectedTime = null;
+                }
+            } else {
+                // Enable time slot button
+                if (!firstAvailableTime) {
+                    firstAvailableTime = slotTime;
+                }
+                
+                if (selectedTime === slotTime) {
+                    slot.className = "py-4 bg-primary text-on-primary font-black hover:scale-105 transition-all duration-300 transform active:scale-95 slot-btn";
+                } else {
+                    slot.className = "py-4 border-2 border-primary font-black hover:bg-primary hover:text-on-primary hover:scale-105 transition-all duration-300 transform active:scale-95 slot-btn";
+                }
+            }
+        });
+        
+        // If current selection is occupied, auto-select first open slot
+        if (!selectedTime && firstAvailableTime) {
+            selectedTime = firstAvailableTime;
+            
+            // Re-run to highlight the newly auto-selected slot
+            updateAvailability();
+        }
+    }
+
+    // 4. Time Slot Click Listeners
+    timeSlots.forEach(slot => {
+        slot.addEventListener('click', () => {
+            const slotTime = slot.textContent.trim();
+            
+            // Prevent selection of disabled slots
+            if (slot.classList.contains('line-through')) return;
+            
+            selectedTime = slotTime;
+            updateAvailability();
+        });
+    });
+
+    // 5. Hall Selection Listener
+    if (hallSelect) {
+        hallSelect.addEventListener('change', (e) => {
+            selectedHall = e.target.value;
+            updateAvailability();
+        });
+    }
+
+    // 6. Form Submission to Google Sheet (using URLSearchParams to avoid CORS preflight issues)
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!selectedTime) {
+                alert("Будь ласка, оберіть доступний час для бронювання!");
+                return;
+            }
+            
+            const name = clientNameInput.value.trim();
+            const phone = clientPhoneInput.value.trim();
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50', 'pointer-events-none');
+            submitBtnText.textContent = "БРОНЮВАННЯ...";
+            
+            if (GOOGLE_SCRIPT_URL) {
+                // Production POST request
+                const formData = new URLSearchParams();
+                formData.append('name', name);
+                formData.append('phone', phone);
+                formData.append('hall', selectedHall);
+                formData.append('date', selectedDate);
+                formData.append('time', selectedTime);
+                
+                try {
+                    const response = await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.status === "success") {
+                        bookings.push({
+                            date: selectedDate,
+                            time: selectedTime,
+                            hall: selectedHall,
+                            status: "Підтверджено"
+                        });
+                        showSuccessModal(false);
+                        bookingForm.reset();
+                    } else {
+                        alert("Помилка під час бронювання: " + result.message);
+                    }
+                } catch (err) {
+                    console.error("Post error:", err);
+                    alert("Сталася помилка з'єднання. Перевірте підключення до мережі.");
+                }
+            } else {
+                // Simulation offline mode
+                setTimeout(() => {
+                    bookings.push({
+                        date: selectedDate,
+                        time: selectedTime,
+                        hall: selectedHall,
+                        status: "Підтверджено"
+                    });
+                    showSuccessModal(true);
+                    bookingForm.reset();
+                }, 800);
+            }
+            
+            // Restore button state
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-50', 'pointer-events-none');
+            submitBtnText.textContent = "ЗАБРОНЮВАТИ ЗАРАЗ";
+            updateAvailability();
+        });
+    }
+
+    // 7. Success Modal Helper
+    function showSuccessModal(isDemo) {
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 z-[200] bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm';
+        modal.id = 'success-modal';
+        
+        // Close modal helper
+        window.closeModal = function() {
+            document.getElementById('success-modal').remove();
+        };
+        
+        modal.innerHTML = `
+            <div class="bg-white text-black border-4 border-black p-8 md:p-12 max-w-md w-full text-center space-y-8 transform transition-transform duration-500 scale-100">
+                <div class="flex justify-center">
+                    <span class="material-symbols-outlined text-7xl text-black">check_circle</span>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-3xl font-black uppercase tracking-tighter">УСПІШНО ЗАБРОНЬОВАНО</h3>
+                    <p class="font-bold uppercase tracking-wider text-xs opacity-50">${selectedHall}</p>
+                    <p class="text-lg font-black uppercase">${selectedDate.split('-').reverse().join('.')} о ${selectedTime}</p>
+                    <p class="text-sm font-semibold text-secondary leading-snug">
+                        ${isDemo 
+                          ? `<strong class="text-black">Демо-режим:</strong> Бронювання додано локально в пам'ять сайту!<br/><br/><span class="text-xs text-secondary/60">Щоб підключити вашу реальну Google Таблицю, вставьте її URL-адрес веб-програми у файл <code class="bg-gray-100 px-1 py-0.5 font-mono text-xs text-black border border-gray-200">booking.html</code> в рядок <code class="bg-gray-100 px-1 py-0.5 font-mono text-xs text-black border border-gray-200">const GOOGLE_SCRIPT_URL = "...";</code></span>`
+                          : "Дякуємо! Ваш час успішно занесено в Google Таблицю. Ми зв'яжемося з вами найближчим часом для підтвердження зйомки."
+                        }
+                    </p>
+                </div>
+                <button onclick="closeModal()" class="w-full bg-black text-white py-4 font-black uppercase tracking-widest hover:bg-secondary transition-all active:scale-95 duration-200">ЗАКРИТИ</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+
+    // 8. General input label animations
     document.querySelectorAll('input, select').forEach(el => {
         el.addEventListener('focus', () => {
             const label = el.closest('.space-y-4').querySelector('label');
@@ -389,20 +660,7 @@
         });
     });
 
-    // Time slot selection logic
-    const timeSlots = document.querySelectorAll('#time-slots button');
-    timeSlots.forEach(slot => {
-        slot.addEventListener('click', () => {
-            timeSlots.forEach(s => {
-                s.classList.remove('bg-primary', 'text-on-primary');
-                s.classList.add('border-2', 'border-primary');
-            });
-            slot.classList.remove('border-2', 'border-primary');
-            slot.classList.add('bg-primary', 'text-on-primary');
-        });
-    });
-
-    // Scroll Reveal Intersection Observer
+    // 9. Intersection Observer Scroll Reveal
     const observerOptions = {
         threshold: 0.1
     };
@@ -421,6 +679,10 @@
     document.querySelectorAll('.reveal, .reveal-line').forEach(el => {
         revealObserver.observe(el);
     });
+
+    // Initialize application on load
+    initCalendar();
+    loadBookings();
 </script>
 
 <!-- Mobile Menu Drawer -->
