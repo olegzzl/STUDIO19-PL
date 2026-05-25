@@ -171,20 +171,22 @@
         document.getElementById('loader').style.display = 'none';
     }
 </script>
+
+<style>#halls, #equipment, #rules, #booking { scroll-margin-top: 100px; }</style>
 <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-sm border-b border-primary/10">
 <nav class="flex justify-between items-center w-full px-margin-desktop py-unit max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-<a class="text-headline-xl font-headline-xl tracking-tighter uppercase text-primary cinematic-entrance inline-block" href="index.html">STUDIO 19</a>
+<a class="text-headline-xl font-headline-xl tracking-tighter uppercase text-primary cinematic-entrance inline-block" href="#hero" onclick="closeIfMobile()">STUDIO 19</a>
 <div class="hidden md:flex gap-gutter items-center">
-<a class="font-label-bold text-label-bold uppercase tracking-widest text-primary nav-link-hover" href="index.html">Головна</a>
-<a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="halls.html">Зали</a>
-<a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="equipment.html">Обладнання</a>
-<a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="equipment.html#rules">Правила</a>
-<a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="booking.html#contacts">Контакти</a>
+<a class="font-label-bold text-label-bold uppercase tracking-widest text-primary nav-link-hover" href="#hero" onclick="closeIfMobile()">Головна</a>
+<a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="#halls" onclick="closeIfMobile()">Зали</a>
+<a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="#equipment" onclick="closeIfMobile()">Обладнання</a>
+<a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="#rules" onclick="closeIfMobile()">Правила</a>
+<a class="font-label-bold text-label-bold uppercase tracking-widest text-secondary nav-link-hover" href="#contacts" onclick="closeIfMobile()">Контакти</a>
 <a href="tel:+380571234567" class="text-secondary hover:text-primary transition-colors flex items-center" title="Зателефонувати">
 <span class="material-symbols-outlined text-xl">call</span>
 </a>
 </div>
-<button class="hidden md:block bg-primary text-on-primary px-6 py-2 font-label-bold text-label-bold uppercase hover:bg-secondary hover:scale-105 active:scale-95 transition-all duration-300" onclick="window.location.href='booking.html'">ЗАБРОНЮВАТИ</button>
+<button class="hidden md:block bg-primary text-on-primary px-6 py-2 font-label-bold text-label-bold uppercase hover:bg-secondary hover:scale-105 active:scale-95 transition-all duration-300" onclick="window.location.href='#booking'; closeIfMobile()">ЗАБРОНЮВАТИ</button>
 <div class="flex items-center gap-2">
 <a href="tel:+380571234567" class="md:hidden text-primary p-2 flex items-center hover:opacity-70 transition-opacity" title="Зателефонувати">
 <span class="material-symbols-outlined text-3xl">call</span>
@@ -193,7 +195,8 @@
 </div>
 </nav>
 </header>
-<main class="pt-40">
+<main id="hero" class="pt-40">
+
 <!-- Hero Section -->
 <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-section-gap">
 <div class="grid grid-cols-12 items-end gap-gutter">
@@ -269,97 +272,508 @@
 </div>
 </div>
 </section>
-</main>
-<!-- Footer -->
-<footer class="bg-primary text-on-primary border-t border-primary reveal-on-scroll">
-<div class="max-w-container-max mx-auto px-margin-desktop py-12 flex flex-col md:flex-row justify-between items-center gap-gutter px-margin-mobile md:px-margin-desktop">
+
+<div id="halls" class="pt-20">
+
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-margin-desktop mb-32 px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-12 gap-gutter">
+<div class="col-span-12 lg:col-span-10">
+<h1 class="font-display-lg text-display-lg mb-12 uppercase stagger-text">
+<span style="animation-delay: 0.1s">НАШІ</span> <span style="animation-delay: 0.2s">ЗАЛИ</span> <span style="animation-delay: 0.3s">—</span> <br/>
+<span style="animation-delay: 0.4s">ВАШ</span> <span class="italic font-normal" style="animation-delay: 0.5s">КРЕАТИВНИЙ</span> <span style="animation-delay: 0.6s">ПРОСТІР.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl fade-in-up" style="animation-delay: 0.8s">
+                    Ми створюємо середовище, де світло та архітектура підсилюють ваше бачення. Три унікальні простори, розроблені для висококласних редакційних матеріалів та професійної fashion-фотографії.
+                </p>
+</div>
+</div>
+</section>
+<!-- Filter Component -->
+<section class="max-w-container-max mx-auto px-margin-desktop mb-16 fade-in-up px-margin-mobile md:px-margin-desktop" style="animation-delay: 1s">
+<div class="flex flex-wrap gap-8 items-center border-t border-primary pt-8">
+<span class="font-label-bold text-label-bold uppercase tracking-widest text-primary">ФІЛЬТР:</span>
+<button class="hall-filter-btn filter-link font-label-bold text-label-bold uppercase tracking-widest text-primary active" onclick="filterHalls('all')">УСІ ПРОСТОРИ</button>
+<button class="hall-filter-btn filter-link font-label-bold text-label-bold uppercase tracking-widest text-secondary hover:text-primary" onclick="filterHalls('minimalism')">МІНІМАЛІЗМ</button>
+<button class="hall-filter-btn filter-link font-label-bold text-label-bold uppercase tracking-widest text-secondary hover:text-primary" onclick="filterHalls('loft')">ЛОФТ</button>
+<button class="hall-filter-btn filter-link font-label-bold text-label-bold uppercase tracking-widest text-secondary hover:text-primary" onclick="filterHalls('classic')">КЛАСИКА</button>
+</div>
+</section>
+<!-- Hall Grid -->
+<section class="max-w-container-max mx-auto px-margin-desktop mb-48 px-margin-mobile md:px-margin-desktop" id="halls-grid">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Hall Card 1: LOFT -->
+<div class="hall-card reveal-on-scroll col-span-1 lg:col-span-8 group relative" data-category="loft">
+<div class="aspect-[16/10] overflow-hidden bg-surface-container">
+<img alt="Зал Лофт" class="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAraJrzwpG9H-BBtR7pvhlFdQD5LUCjzYUQFWd5C4EajjLuCnwvshaOhF90IBNoVc3Zey8f0-O7_abZXMXMbrmrltnjZu3y1e355BoNjwDDzpshOESBk2oahxgSeOqJrW-RJVbSr_-HqP4fwpUe1ebicLqK2cdjGsfMxyj78HLFH6SqUGPO8qgMhcF1rrft8IT4J1_1XNY_XpCJzzOdUhGlCZ0aHk6rXUzlG1wKRwOjqHxn6qLEV9WB7PlMXOfQpXMFhieEAGZLy13w"/>
+</div>
+<div class="pt-8">
+<div class="flex flex-col md:flex-row justify-between items-start gap-4">
+<div>
+<h4 class="font-headline-xl text-headline-xl uppercase transition-colors duration-300 group-hover:text-secondary">ЗАЛ 01 / LOFT</h4>
+<p class="font-body-md text-secondary mt-2">120 м² • Стелі 5.5м • Панорамні вікна</p>
+</div>
+<div class="flex flex-col items-end gap-4">
+<span class="font-label-bold text-label-bold text-primary border border-primary px-4 py-2">800 UAH/год</span>
+<button class="font-label-bold text-label-bold uppercase tracking-widest bg-primary text-white px-8 py-3 hover:bg-secondary transition-all duration-300 transform active:scale-95" onclick="window.location.href='booking.html'">ЗАБРОНЮВАТИ</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Hall Card 2: MINIMALISM -->
+<div class="hall-card reveal-on-scroll col-span-1 lg:col-span-4 group relative" data-category="minimalism">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container">
+<img alt="Зал Мінімалізм" class="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1_kDbwuxHzNAtaRK2lsVtURk5Rt1xaArOiCRsUnNPQXXUz7vLnv_bCgsnoYQEpFAlfdRD31FSk9vPCBVwak2GYuFctjv_Yyk9YBQDB95wVr0VQ7RVXQ1fmV6h9Ze4xXRmbb1nQto_FxQ_NeAY68NwasdA2H5K_3GmJJImbJalO9EcmjyLhsMVTXSCHQMH517mhYXxGcisXPD5ED8R0_B4_cy91dI5JgQMOe6oYMJ2Rqfth7z4QshAymPyRz2GhI-IzkGalKLrcN_H"/>
+</div>
+<div class="pt-8">
+<h4 class="font-headline-md text-headline-md uppercase transition-colors duration-300 group-hover:text-secondary">ЗАЛ 02 / MONO</h4>
+<p class="font-body-md text-secondary mt-2 mb-6">85 м² • Циклорама 6x5м</p>
+<div class="flex justify-between items-center">
+<span class="font-label-bold text-label-bold text-primary">800 UAH/год</span>
+<a class="font-label-bold text-label-bold uppercase border-b-2 border-primary pb-1 hover:text-secondary hover:border-secondary transition-all duration-300" href="halls.html">ПЕРЕГЛЯНУТИ</a>
+</div>
+</div>
+</div>
+<!-- Hall Card 3: CLASSIC -->
+<div class="hall-card reveal-on-scroll col-span-1 lg:col-span-5 group relative" data-category="classic">
+<div class="aspect-[4/5] overflow-hidden bg-surface-container">
+<img alt="Зал Класик" class="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl7PtoN3KS1XGObhpyL4RzpPW9q8HBgybrz5cj6VLe1X8Mpj5rO_3wtQS6xsnLAyAc7Zma2pHy4xSJWu3Ed5KHSeXnX7UgvY0szWBA9Yw3MfuCK30JKY7LAdywGtzcdjDH8m6nN2W5E5DNjeUHt4E6Fv_ZrC5i08pinBMhPLl7T8ybm8LLKD1KiWWXO0hPcvXH_6ENj1DXnrDSNzt-sH0Pnb70-QK_ju_kCpMrSHmYbeun85Uv1gPv8aRxy6GtKiNYuPAtV8W6EqEf"/>
+</div>
+<div class="pt-8">
+<h4 class="font-headline-md text-headline-md uppercase transition-colors duration-300 group-hover:text-secondary">ЗАЛ 03 / CLASSIC</h4>
+<p class="font-body-md text-secondary mt-2 mb-6">100 м² • Стелі 4.8м • Деталі спадщини</p>
+<div class="flex justify-between items-center">
+<span class="font-label-bold text-label-bold text-primary">800 UAH/год</span>
+<a class="font-label-bold text-label-bold uppercase border-b-2 border-primary pb-1 hover:text-secondary hover:border-secondary transition-all duration-300" href="halls.html">ПЕРЕГЛЯНУТИ</a>
+</div>
+</div>
+</div>
+<!-- Hall Card 4: Editorial Portfolio -->
+<div class="hall-card reveal-on-scroll col-span-1 lg:col-span-7 group relative" data-category="minimalism">
+<div class="aspect-[16/9] overflow-hidden bg-surface-container">
+<img alt="Портфоліо" class="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBao3AbT8kIUkgLOEBvGWal0E2viylxDGpBMCDFR46oCr7jLc-07pOsDyvrpm7fWagOs97I-mnPjuJo6jQH9yQL0lsMe2M7rt19M-Xksx9Dt_P-mKNGMWGjHe7AuLwM5bw1jnRKQeTyaWW47l4Ec_wV_DXgK0txbI-VVLLhOxNhVyofoorV6jtiJeGtHDpDZ9ZqA4zYDgHPAGbqqetJiENb48hd1dzRBiZGXmbXdyATia0tuzQMojCpjiRe7eE7AhzgiJdwdvQd5fDH"/>
+</div>
+<div class="pt-8">
+<div class="flex justify-between items-end">
+<div>
+<h4 class="font-headline-md text-headline-md uppercase transition-colors duration-300 group-hover:text-secondary">СТУДІЙНА ЕКСПОЗИЦІЯ</h4>
+<p class="font-body-md text-secondary mt-2">Доступно для роботи в режимі галереї та колаборацій.</p>
+</div>
+<span class="font-label-bold text-label-bold text-outline opacity-50 uppercase tracking-widest">ДОСТУПНИЙ РЕЖИМ ГАЛЕРЕЇ</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- High Contrast Contact Section -->
+<section class="bg-primary py-48 text-white overflow-hidden">
+<div class="max-w-container-max mx-auto px-margin-desktop px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+<div class="reveal-on-scroll">
+<h2 class="font-display-lg text-display-lg mb-16 uppercase">ГОТОВІ <br/> <span class="text-stroke">ТВОРИТИ?</span></h2>
+<form class="space-y-16 max-w-md">
+<div class="relative group">
+<label class="font-label-bold text-label-bold uppercase tracking-widest opacity-60 mb-4 block transition-opacity group-focus-within:opacity-100">ІМ'Я</label>
+<input class="w-full bg-transparent border-b-2 border-white/20 py-4 focus:border-white focus:outline-none transition-all duration-300 font-body-lg text-body-lg" placeholder="Ваше ім'я" type="text"/>
+</div>
+<div class="relative group">
+<label class="font-label-bold text-label-bold uppercase tracking-widest opacity-60 mb-4 block transition-opacity group-focus-within:opacity-100">EMAIL АБО ТЕЛЕФОН</label>
+<input class="w-full bg-transparent border-b-2 border-white/20 py-4 focus:border-white focus:outline-none transition-all duration-300 font-body-lg text-body-lg" placeholder="Контактні дані" type="text"/>
+</div>
+<button class="group w-full flex justify-between items-center py-6 px-12 border-2 border-white hover:bg-white hover:text-primary transition-all duration-500 transform active:scale-[0.98]">
+<span class="font-label-bold text-label-bold uppercase tracking-widest">ВІДПРАВИТИ ЗАПИТ</span>
+<span class="material-symbols-outlined text-[24px] group-hover:translate-x-4 transition-transform">arrow_forward</span>
+</button>
+</form>
+</div>
+<div class="relative reveal-on-scroll" style="transition-delay: 0.2s">
+<img alt="Обладнання" class="w-full grayscale opacity-70 hover:opacity-100 transition-all duration-1000 transform hover:scale-[1.02]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUU_nSSOSCwbzOZkHNCUrhUeQqKPmfN04m0ux7Z_L3Dtzva_mqkBY_ZZkfKGKse3ecJyiMJrNrspaj8PAQMd-uAq9zibQdIw3g5M3P5DJKne3q6XCH2mSOcsmwvKql0aTUycqf34chwS__LiCqLHWNvUmc-BuE4kpzPK5GiAcZaNgq9gw_eTNkR7k2Yt2lCGVK0UOLoKcdaTw1XKfaZ1JnQ6lWwht0vpGGXrU9Njb-4eQJHjUTj5ZR-f9RKLFn1gl7US_6JLkbXgo7"/>
+<div class="absolute -bottom-10 -right-10 w-48 h-48 bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center hidden lg:flex hover:scale-110 transition-transform duration-500">
+<div class="text-center">
+<p class="font-headline-xl text-5xl mb-1">19</p>
+<p class="font-label-bold text-label-bold uppercase tracking-tighter">Засновано 2026</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+<div id="equipment" class="pt-20">
+
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap overflow-hidden">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-end">
+<div class="md:col-span-8">
+<h1 class="font-display-lg text-5xl md:text-[64px] md:text-display-lg text-primary mb-10 dramatic-fade-in active">
+                    ОБЛАДНАННЯ ПРЕМІУМ-КЛАСУ ДЛЯ ВАШОГО БЕЗКОМПРОМІСНОГО БАЧЕННЯ.
+                </h1>
+<p class="font-body-lg text-body-lg text-primary max-w-2xl font-semibold reveal-on-scroll" style="transition-delay: 400ms;">
+                    Ми надаємо доступ до індустріальних стандартів освітлення Profoto та цифрових систем Phase One для професіоналів, які вимагають ідеального результату в кожному кадрі.
+                </p>
+</div>
+<div class="md:col-span-4 flex justify-end reveal-on-scroll" style="transition-delay: 600ms;">
+
+</div>
+</div>
+</section>
+<!-- Equipment Grid -->
+<section class="bg-primary text-white py-section-gap">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex flex-col md:flex-row justify-between items-baseline mb-20 border-b border-white/20 pb-8 reveal-on-scroll">
+<h2 class="font-headline-xl text-headline-xl uppercase tracking-tighter">ТЕХНІЧНИЙ ІНВЕНТАР</h2>
+<span class="font-label-bold text-label-bold uppercase opacity-50">STK-INV 2026 / ХАРКІВ</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+<!-- Lighting -->
+<div class="space-y-8">
+<h3 class="font-headline-md text-headline-md uppercase reveal-on-scroll">ІМПУЛЬСНЕ СВІТЛО</h3>
+<ul class="space-y-6">
+<li class="flex justify-between items-end border-b border-white/10 pb-2 reveal-staggered" data-delay="0">
+<span class="font-body-lg font-bold">Profoto D2 1000 AirTTL</span>
+<span class="font-label-bold opacity-60">06 ОДИНИЦЬ</span>
+</li>
+<li class="flex justify-between items-end border-b border-white/10 pb-2 reveal-staggered" data-delay="100">
+<span class="font-body-lg font-bold">Profoto Pro-11 2400</span>
+<span class="font-label-bold opacity-60">02 ОДИНИЦІ</span>
+</li>
+<li class="flex justify-between items-end border-b border-white/10 pb-2 reveal-staggered" data-delay="200">
+<span class="font-body-lg font-bold">Profoto B10X Plus</span>
+<span class="font-label-bold opacity-60">04 ОДИНИЦІ</span>
+</li>
+</ul>
+</div>
+<!-- Modifiers -->
+<div class="space-y-8">
+<h3 class="font-headline-md text-headline-md uppercase reveal-on-scroll" style="transition-delay: 100ms;">СВІТЛОВІ МОДИФІКАТОРИ</h3>
+<ul class="space-y-6">
+<li class="flex justify-between items-end border-b border-white/10 pb-2 reveal-staggered" data-delay="300">
+<span class="font-body-lg font-bold">Softbox RFi 3x4'</span>
+<span class="font-label-bold opacity-60">ВКЛЮЧЕНО</span>
+</li>
+<li class="flex justify-between items-end border-b border-white/10 pb-2 reveal-staggered" data-delay="400">
+<span class="font-body-lg font-bold">Beauty Dish (S/W)</span>
+<span class="font-label-bold opacity-60">ВКЛЮЧЕНО</span>
+</li>
+<li class="flex justify-between items-end border-b border-white/10 pb-2 reveal-staggered" data-delay="500">
+<span class="font-body-lg font-bold">Magnum Reflector</span>
+<span class="font-label-bold opacity-60">ВКЛЮЧЕНО</span>
+</li>
+<li class="flex justify-between items-end border-b border-white/10 pb-2 reveal-staggered" data-delay="600">
+<span class="font-body-lg font-bold">Giant Silver 150</span>
+<span class="font-label-bold opacity-60">ДОДАТКОВО</span>
+</li>
+</ul>
+</div>
+<!-- Cameras -->
+<div class="space-y-8">
+<h3 class="font-headline-md text-headline-md uppercase reveal-on-scroll" style="transition-delay: 200ms;">КАМЕРНІ СИСТЕМИ</h3>
+<ul class="space-y-6">
+<li class="flex justify-between items-end border-b border-white/10 pb-2 reveal-staggered" data-delay="700">
+<span class="font-body-lg font-bold">Phase One XF IQ4</span>
+<span class="font-label-bold opacity-60">ОРЕНДА</span>
+</li>
+<li class="flex justify-between items-end border-b border-white/10 pb-2 reveal-staggered" data-delay="800">
+<span class="font-body-lg font-bold">Sony A7R V</span>
+<span class="font-label-bold opacity-60">ОРЕНДА</span>
+</li>
+<li class="flex justify-between items-end border-b border-white/10 pb-2 reveal-staggered" data-delay="900">
+<span class="font-body-lg font-bold">Canon EOS R5</span>
+<span class="font-label-bold opacity-60">ОРЕНДА</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Visual Statement -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap overflow-hidden">
+<div class="reveal-on-scroll relative group parallax-wrapper">
+<img alt="Студійне обладнання" class="w-full h-[700px] object-cover high-contrast-image parallax-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb8tMHUZXDejD2Pm1Jgr0HVFJZlt6SZIBS3LOOG2YwkWHfbnI1SWqoIjZJqxEs68SQ15UyBitbTczylKLVubDRayMjTu57AiZQ1NXPVU9iai4WJRvcmcCtRW3WgRUlE071vI2vYCblPz14YVeCOdYyxBYTXT4_8OXy9qx7r8_uPSikk4Y0tZ-i_5sIg7DvxuPL5JfklynfLx6i2Rc6ZujJJkV_lnGKcA4iqoZex70oXdG9AQUSidOHOBthuEunj0AJdD8Coygc2MAK"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+</div>
+<div class="mt-12 flex flex-col md:flex-row justify-between items-start gap-12 reveal-on-scroll">
+<div class="max-w-xl">
+<p class="font-headline-md text-headline-md italic tracking-tighter">"ПРОСТІР, ДЕ ТЕХНІЧНА ДОСКОНАЛІСТЬ СПРИЯЄ ТВОРЧІЙ СВОБОДІ."</p>
+</div>
+<div class="text-left md:text-right">
+<p class="font-label-bold text-label-bold uppercase tracking-widest text-secondary mb-2">ХАРКІВ, ВУЛ. СУМСЬКА 1</p>
+<p class="font-headline-md text-headline-md uppercase tracking-tighter">ГОЛОВНИЙ ЗАЛ / КОНФІГУРАЦІЯ A</p>
+</div>
+</div>
+</section>
+<!-- Rules Section -->
+<section id="rules" class="border-t-8 border-primary py-section-gap overflow-hidden">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<div class="md:col-span-4">
+<h2 class="font-display-lg text-5xl md:text-[64px] uppercase tracking-tighter sticky top-32 reveal-on-scroll">КОДЕКС<br/>СТУДІЇ</h2>
+</div>
+<div class="md:col-span-8 space-y-32">
+<!-- Rule 01 -->
+<div class="reveal-slide-left border-l-[12px] border-primary pl-10">
+<div class="flex items-center gap-6 mb-8">
+<span class="font-display-lg text-primary opacity-10">01</span>
+<h3 class="font-headline-xl text-headline-xl uppercase tracking-tighter">БРОНЮВАННЯ</h3>
+</div>
+<div class="space-y-8">
+<p class="font-body-lg text-body-lg text-primary font-bold">
+                                Мінімальний термін оренди становить 2 години. Бронювання підтверджується через наш цифровий портал або прямий запит. Студійний час починається суворо у заплановану годину.
+                            </p>
+<p class="font-body-md text-body-md uppercase font-black tracking-widest bg-primary text-white inline-block px-4 py-2 hover:scale-105 transition-transform duration-300">
+                                ПІДГОТОВКА ТА ЗБІР МАЮТЬ ВІДБУВАТИСЯ В МЕЖАХ ЗАБРОНЬОВАНОГО ЧАСУ.
+                            </p>
+</div>
+</div>
+<!-- Rule 02 -->
+<div class="reveal-slide-left border-l-[12px] border-primary pl-10" style="transition-delay: 200ms;">
+<div class="flex items-center gap-6 mb-8">
+<span class="font-display-lg text-primary opacity-10">02</span>
+<h3 class="font-headline-xl text-headline-xl uppercase tracking-tighter">СКАСУВАННЯ</h3>
+</div>
+<div class="space-y-8">
+<p class="font-body-lg text-body-lg text-primary font-bold">
+                                Повне повернення коштів при скасуванні за 48+ годин. Скасування менш ніж за 24 години тягне за собою 100% оплату вартості оренди.
+                            </p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-label-bold uppercase tracking-widest text-primary">
+<div class="border-2 border-primary p-4 hover:bg-primary hover:text-white transition-colors duration-300 cursor-default">48Г+: 100% ПОВЕРНЕННЯ</div>
+<div class="border-2 border-primary p-4 hover:bg-primary hover:text-white transition-colors duration-300 cursor-default">24-48Г: 50% ПОВЕРНЕННЯ</div>
+<div class="border-2 border-primary p-4 hover:bg-primary hover:text-white transition-colors duration-300 cursor-default">24Г-: БЕЗ ПОВЕРНЕННЯ</div>
+</div>
+</div>
+</div>
+<!-- Rule 03 -->
+<div class="reveal-slide-left border-l-[12px] border-primary pl-10" style="transition-delay: 400ms;">
+<div class="flex items-center gap-6 mb-8">
+<span class="font-display-lg text-primary opacity-10">03</span>
+<h3 class="font-headline-xl text-headline-xl uppercase tracking-tighter">СЕРЕДОВИЩЕ</h3>
+</div>
+<div class="space-y-8">
+<p class="font-body-lg text-body-lg text-primary font-bold">
+                                Тільки чисте змінне взуття. Паперові фони вимагають захисного скотчу на підошвах. Простір має бути повернутий до початкової конфігурації.
+                            </p>
+<div class="flex flex-wrap gap-12">
+<div class="flex items-center gap-4 group cursor-default">
+<span class="material-symbols-outlined text-primary font-black text-3xl group-hover:rotate-12 transition-transform duration-300">block</span>
+<span class="font-label-bold uppercase tracking-widest">КУРІННЯ ЗАБОРОНЕНО</span>
+</div>
+<div class="flex items-center gap-4 group cursor-default">
+<span class="material-symbols-outlined text-primary font-black text-3xl group-hover:rotate-12 transition-transform duration-300">cleaning_services</span>
+<span class="font-label-bold uppercase tracking-widest">ПРИБИРАННЯ: ЗА 10 ХВ ДО КІНЦЯ</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="bg-primary text-white py-section-gap overflow-hidden">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+<div class="reveal-on-scroll space-y-12">
+<p class="font-label-bold text-label-bold uppercase tracking-[0.3em] opacity-50">СТВОРЮЙТЕ СВОЮ ІСТОРІЮ</p>
+<h2 class="font-display-lg text-5xl md:text-[64px] md:text-display-lg uppercase tracking-tighter">ЗАБРОНЮЙТЕ СЕСІЮ.</h2>
+<div class="flex flex-col md:flex-row gap-8 justify-center pt-8">
+<button class="bg-white text-primary px-16 py-8 font-label-bold text-label-bold uppercase tracking-widest btn-hover-effect" onclick="window.location.href='booking.html'">ЗАБРОНЮВАТИ СТУДІЮ</button>
+<button class="border-4 border-white text-white px-16 py-8 font-label-bold text-label-bold uppercase tracking-widest btn-hover-effect" onclick="window.location.href='booking.html#contacts'">ЗВ'ЯЗАТИСЯ З АГЕНТОМ</button>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+<div id="booking" class="pt-20">
+
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-margin-desktop mb-24 px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-12 gap-gutter items-end">
+<div class="col-span-12 md:col-span-8">
+<h1 class="font-black text-4xl md:text-7xl lg:text-8xl uppercase leading-[0.9] tracking-tighter mb-8 fade-in-entrance">Забронювати час</h1>
+<p class="font-body-lg text-xl md:text-2xl text-primary max-w-xl leading-snug font-bold fade-in-entrance" style="animation-delay: 0.1s;">
+                    Простір, де світло і тінь створюють історію. 800 UAH/год. Оберіть свій зал та час для творчості.
+                </p>
+</div>
+<div class="col-span-12 md:col-span-4 grayscale contrast-125 fade-in-entrance" style="animation-delay: 0.2s;">
+<div class="aspect-[3/4] bg-primary overflow-hidden">
+<img alt="Контрастна чорно-біла фотографія мінімалістичної студії" class="w-full h-full object-cover opacity-90 transition-transform duration-700 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz8cIXsqY9WeNMSh_wsw2kgCozbdE54nGaik9B0fYNm5r0MAzNAz3ZVqVG4wmzqM3IYI0p9kNaVo4_YGoqrvQayiGJMBhgevYFcA9Tr9yApmtsEyIi369iQU29LvE3eCFz1lqCOEG_BTRHacd3NpOUaN8Q9uzmZ-s4JvhPv-fc9QYfYpan3W0Glbjh_D8y-HN6_9yfQ9zRIANa7fhuxAzGr5X4TFMQZ1f28V2GfOOxIz9cARTs0MObSGXoWw7yUH5lmY_ksZ2KiUxc"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Booking & Contact Section -->
+<section class="max-w-container-max mx-auto px-margin-desktop mb-32 px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Left: Booking Form -->
+<div class="col-span-12 lg:col-span-7 space-y-16">
+<!-- Calendar -->
+<div id="calendar-section" class="border-4 border-primary p-8 md:p-12 scroll-mt-[96px] lg:scroll-mt-[120px]">
+<div class="flex justify-between items-center mb-12">
+<h3 id="month-title" class="text-4xl font-black uppercase tracking-tighter">Жовтень 2026</h3>
+<div class="flex gap-2">
+<button id="prev-month" type="button" class="w-12 h-12 flex items-center justify-center border-2 border-primary hover:bg-primary hover:text-on-primary transition-all active:scale-90"><span class="material-symbols-outlined">chevron_left</span></button>
+<button id="next-month" type="button" class="w-12 h-12 flex items-center justify-center border-2 border-primary hover:bg-primary hover:text-on-primary transition-all active:scale-90"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<div class="calendar-grid mb-4">
+<div class="text-center font-black text-xs uppercase tracking-widest pb-4">Пн</div>
+<div class="text-center font-black text-xs uppercase tracking-widest pb-4">Вт</div>
+<div class="text-center font-black text-xs uppercase tracking-widest pb-4">Ср</div>
+<div class="text-center font-black text-xs uppercase tracking-widest pb-4">Чт</div>
+<div class="text-center font-black text-xs uppercase tracking-widest pb-4">Пт</div>
+<div class="text-center font-black text-xs uppercase tracking-widest pb-4">Сб</div>
+<div class="text-center font-black text-xs uppercase tracking-widest pb-4">Нд</div>
+</div>
+<div class="calendar-grid gap-2" id="calendar-container">
+<!-- Days generated dynamically by JavaScript -->
+</div>
+<div class="mt-16">
+<p class="font-black text-xs uppercase tracking-[0.2em] mb-8">Доступний час</p>
+<div class="grid grid-cols-3 md:grid-cols-6 gap-4" id="time-slots">
+<button class="py-4 border-2 border-primary font-black hover:bg-primary hover:text-on-primary hover:scale-105 transition-all duration-300 transform active:scale-95">10:00</button>
+<button class="py-4 border-2 border-primary font-black hover:bg-primary hover:text-on-primary hover:scale-105 transition-all duration-300 transform active:scale-95">12:00</button>
+<button class="py-4 bg-primary text-on-primary font-black hover:scale-105 transition-all duration-300 transform active:scale-95 selected-slot">14:00</button>
+<button class="py-4 border-2 border-primary font-black hover:bg-primary hover:text-on-primary hover:scale-105 transition-all duration-300 transform active:scale-95">16:00</button>
+<button class="py-4 border-2 border-primary font-black hover:bg-primary hover:text-on-primary hover:scale-105 transition-all duration-300 transform active:scale-95">18:00</button>
+<button class="py-4 border-2 border-primary font-black hover:bg-primary hover:text-on-primary hover:scale-105 transition-all duration-300 transform active:scale-95">20:00</button>
+</div>
+</div>
+</div>
+<!-- Contact Details Form -->
+<form id="booking-form" class="space-y-12">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="space-y-4">
+<label class="font-black text-xs uppercase tracking-widest opacity-50 transition-all duration-300">Ім'я</label>
+<div class="input-underline">
+<input id="client-name" required class="w-full bg-transparent border-0 border-b-4 border-primary/20 focus:ring-0 focus:border-primary/20 py-4 px-0 font-black text-2xl uppercase placeholder:text-primary/10" placeholder="Олександр" type="text"/>
+</div>
+</div>
+<div class="space-y-4">
+<label class="font-black text-xs uppercase tracking-widest opacity-50 transition-all duration-300">Телефон</label>
+<div class="input-underline">
+<input id="client-phone" required class="w-full bg-transparent border-0 border-b-4 border-primary/20 focus:ring-0 focus:border-primary/20 py-4 px-0 font-black text-2xl uppercase placeholder:text-primary/10" placeholder="+380 (00) 000-00-00" type="tel"/>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<label class="font-black text-xs uppercase tracking-widest opacity-50 transition-all duration-300">Вибір залу</label>
+<div class="input-underline">
+<select id="hall-select" class="w-full bg-transparent border-0 border-b-4 border-primary/20 focus:ring-0 focus:border-primary/20 py-4 px-0 font-black text-2xl uppercase appearance-none cursor-pointer">
+<option>Зал "Symmetry" (120м²)</option>
+<option>Зал "Shadows" (85м²)</option>
+<option>Зал "Morning" (150м²)</option>
+</select>
+</div>
+</div>
+<button id="submit-btn" class="w-full md:w-auto bg-primary text-on-primary px-16 py-6 font-black text-xl uppercase tracking-tighter hover:bg-secondary transition-all active:scale-95 duration-200" type="submit">
+    <span id="submit-btn-text">Забронювати зараз</span>
+</button>
+</form>
+</div>
+<!-- Right: Information & Map -->
+<div id="contacts" class="col-span-12 lg:col-span-4 lg:col-start-9 space-y-24 scroll-mt-[72px] lg:scroll-mt-[88px]">
+<div class="space-y-12">
+<div>
+<p class="font-black text-xs uppercase tracking-widest mb-6">Адреса</p>
+<h4 class="text-3xl font-black uppercase tracking-tighter leading-none">Харків, вул. Сумська 1<br/>(метро Історичний музей, під "Градусником")</h4>
+</div>
+<div>
+<p class="font-black text-xs uppercase tracking-widest mb-6">Контакти</p>
+<p class="text-2xl font-black">+38 (057) 123-45-67</p>
+<p class="text-2xl font-black uppercase underline decoration-4 underline-offset-8">hello@studio19.ua</p>
+</div>
 <div class="flex flex-col gap-4">
-<a class="font-headline-md text-headline-md text-on-primary uppercase font-bold hover:tracking-widest transition-all duration-700" href="index.html">STUDIO 19</a>
-<p class="font-body-md text-body-md opacity-70">Харків, вул. Сумська 1 (метро Історичний музей, під "Градусником")</p>
+<a class="font-black text-lg uppercase tracking-tighter hover:bg-primary hover:text-on-primary px-2 -ml-2 inline-block transition-all duration-300" href="#">Instagram</a>
+<a class="font-black text-lg uppercase tracking-tighter hover:bg-primary hover:text-on-primary px-2 -ml-2 inline-block transition-all duration-300" href="#">Pinterest</a>
+<a class="font-black text-lg uppercase tracking-tighter hover:bg-primary hover:text-on-primary px-2 -ml-2 inline-block transition-all duration-300" href="#">Telegram</a>
 </div>
-<div class="flex gap-8">
-<a class="font-label-bold text-label-bold uppercase text-primary-fixed-dim opacity-70 hover:opacity-100 transition-opacity nav-link-hover" href="#">Instagram</a>
-<a class="font-label-bold text-label-bold uppercase text-primary-fixed-dim opacity-70 hover:opacity-100 transition-opacity nav-link-hover" href="#">Facebook</a>
-<a class="font-label-bold text-label-bold uppercase text-primary-fixed-dim opacity-70 hover:opacity-100 transition-opacity nav-link-hover" href="#">Політика конфіденційності</a>
 </div>
-<div class="text-right">
-<p class="font-body-md text-body-md">© 2026 STUDIO 19. Харків, Сумська 1. 800 UAH/год. 9:00 - 18:00. | design by <a href="https://www.instagram.com/olegzzl/" target="_blank" class="hover:opacity-70 transition-opacity underline">olegzzl</a></p>
+<!-- Map Section (High Contrast B&W) -->
+<div class="relative w-full aspect-square grayscale contrast-[150%] invert overflow-hidden border-4 border-primary bg-primary reveal">
+<img alt="Висококонтрастна чорно-біла карта центру Харкова" class="w-full h-full object-cover opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApbw6VhviHsRiPbH2H0rhBmOtJNDmidLpBp7BkNmw2PVU-3lbZoSJ46qGKyIOunPTLUM9GHcsaAFo3sFK0-Jlb2L6uXzNeCe0TlhV--6z12PxlxN2Qxrn6Dqm5u39LWy7WPpSyKJovSB2rl8gi7KZHdk_tRWhc8dT3gOU00b2AKkfAoUwAL1cv016wjZ5ReXa5oqu64Vb4EBUt_TkEZRDNtNHMhZ1XqLGQxcKf9OJeWODS3Aavcu2IrH_v8_daVOuw8eSDO3deV9pS"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-6 h-6 bg-white rounded-full animate-ping"></div>
+<div class="w-4 h-4 bg-white rounded-full absolute"></div>
 </div>
+</div>
+<div class="border-4 border-primary p-8 reveal">
+<p class="font-black text-xs uppercase tracking-widest mb-8">Правила студії</p>
+<ul class="space-y-6 font-black uppercase text-sm tracking-tight">
+<li class="flex gap-6 items-baseline transform transition-transform duration-300 hover:translate-x-2"><span class="text-4xl leading-none">01</span> Бронювання від 2 годин</li>
+<li class="flex gap-6 items-baseline transform transition-transform duration-300 hover:translate-x-2"><span class="text-4xl leading-none">02</span> Чисте змінне взуття обов'язкове</li>
+<li class="flex gap-6 items-baseline transform transition-transform duration-300 hover:translate-x-2"><span class="text-4xl leading-none">03</span> Скасування за 48 годин</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Aesthetic Divider -->
+<div class="max-w-container-max mx-auto px-margin-desktop mb-24 px-margin-mobile md:px-margin-desktop">
+<div class="w-full h-2 bg-primary transform scale-x-0 transition-transform duration-1000 origin-left reveal-line"></div>
+</div>
+<!-- Secondary Imagery / Hall Preview -->
+<section class="max-w-container-max mx-auto px-margin-desktop mb-40 reveal px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-12 gap-gutter">
+<div class="col-span-12 md:col-span-5 space-y-8">
+<div class="aspect-[3/4] overflow-hidden border-4 border-primary gallery-image-container grayscale contrast-125">
+<img alt="Висококонтрастна чорно-біла едіторіал фотографія" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBah-a-gSotbL29zQg8PCnBD7lVdrXXFeEVKNXIdSZfPng2q5aWz16Hp8yFwmAgeN2Sz6H6hMtwnjv64iYsKXR86euaDQ2Y81aZ3DPplWlOXLOW1d2jeBIQ5CNCyQ7oH4fSBVLC90IWntZ0_eHHs0aqfk1YJXnn5FrPAjdQ8E4TML-hqpyuUm2kxnpWBoi6IoU8Mq6XdmwNOmZpWoofKxcicXhI12hXJdLoUVF4hRAKDVTlXlCWLaEEV-XiWAxtm6iZzGXYP79IdVnH"/>
+</div>
+<h5 class="text-4xl font-black uppercase tracking-tighter">Symmetry Hall</h5>
+</div>
+<div class="col-span-12 md:col-span-7">
+<div class="aspect-video overflow-hidden border-4 border-primary gallery-image-container grayscale contrast-125">
+<img alt="Широкий план чорно-білої фотостудії" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd37Tbeb7kXK4swRNhvVxiJysSqSTnEedLW57xZWUqR7QXYndYa4uoKAwm1f66yh0dwPgN1W5V-h45qU9_NMubtRw5PNbSST5_MpfZYyvtkxZ6mpuSHCFmx_pPHwogBfZ-WJIsDgYdPPH0C-UeTSMmnrprJYanjaj-Ep-yJwAgS233SB2IMmKczdkfR8kYw2GVkc3XvEztJI8R4aYcfUY818VORe0dul1duueGH0Qj2-k2zebG6B13dNgee-B7M-CCtVqsPvs_c1mE"/>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+</main>
+<footer class="w-full bg-primary text-on-primary border-t border-primary">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop py-16 gap-gutter max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex flex-col items-center md:items-start gap-4">
+<h2 class="font-black text-5xl uppercase tracking-tighter">STUDIO 19</h2>
+<p class="font-body-md text-center md:text-left opacity-80 uppercase tracking-widest text-xs">
+                © 2026 STUDIO 19. Харків, Сумська 1. 800 UAH/год. 9:00 – 18:00. | design by <a href="https://www.instagram.com/olegzzl/" target="_blank" class="hover:opacity-70 transition-opacity underline">olegzzl</a>
+            </p>
+</div>
+<div class="flex gap-12">
+<div class="flex flex-col gap-2">
+<p class="font-label-bold text-xs uppercase tracking-[0.2em] mb-2 opacity-50">Навігація</p>
+<a class="font-black uppercase tracking-tight hover:opacity-70 transition-opacity" href="#hero">Головна</a>
+<a class="font-black uppercase tracking-tight hover:opacity-70 transition-opacity" href="#halls">Зали</a>
+<a class="font-black uppercase tracking-tight hover:opacity-70 transition-opacity" href="#rules">Правила</a>
+</div>
+<div class="flex flex-col gap-2">
+<p class="font-label-bold text-xs uppercase tracking-[0.2em] mb-2 opacity-50">Соцмережі</p>
+<a class="font-black uppercase tracking-tight hover:opacity-70 transition-opacity" href="#">Instagram</a>
+<a class="font-black uppercase tracking-tight hover:opacity-70 transition-opacity" href="#">Facebook</a>
+<a class="font-black uppercase tracking-tight hover:opacity-70 transition-opacity" href="#">Конфіденційність</a>
+</div>
+</div>
+<button class="w-16 h-16 border-2 border-on-primary flex items-center justify-center hover:bg-on-primary hover:text-primary transition-all active:scale-90 duration-300" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+<span class="material-symbols-outlined">arrow_upward</span>
+</button>
 </div>
 </footer>
-<script>
-    window.addEventListener('DOMContentLoaded', () => {
-        const loader = document.getElementById('loader');
-        if (sessionStorage.getItem('loaded') === 'true') {
-            loader.style.display = 'none';
-            revealElements();
-        } else {
-            sessionStorage.setItem('loaded', 'true');
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                    revealElements();
-                }, 1000);
-            }, 1200);
-        }
-    });
-
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const revealElements = () => {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    // We can unobserve if we only want it to reveal once
-                    // observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-    };
-
-    // Parallax & Subtle Zoom on Scroll
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const heroImg = document.getElementById('hero-parallax-img');
-        
-        if(heroImg) {
-            // Subtle zoom and slow movement
-            const scale = 1 + scrolled * 0.00005;
-            const translate = scrolled * 0.05;
-            heroImg.style.transform = `scale(${scale}) translateY(${translate}px)`;
-        }
-    });
-
-    // Run reveal logic
-    revealElements();
-</script>
-
-<!-- Mobile Menu Drawer -->
 <div id="mobile-menu" class="fixed inset-0 bg-surface z-[100] transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col px-margin-mobile py-8">
     <div class="flex justify-between items-center mb-12">
-        <a href="index.html" class="text-3xl font-bold uppercase tracking-tighter text-primary">STUDIO 19</a>
+        <a href="#hero" onclick="toggleMobileMenu()" class="text-3xl font-bold uppercase tracking-tighter text-primary">STUDIO 19</a>
         <button onclick="toggleMobileMenu()" class="text-primary p-2"><span class="material-symbols-outlined text-3xl">close</span></button>
     </div>
     <div class="flex flex-col gap-6 text-xl font-bold uppercase tracking-widest text-primary">
-        <a href="index.html">Головна</a>
-        <a href="halls.html">Зали</a>
-        <a href="equipment.html">Обладнання</a>
-        <a href="equipment.html#rules" onclick="toggleMobileMenu()">Правила</a>
-        <a href="booking.html#contacts" onclick="toggleMobileMenu()">Контакти</a>
+        <a href="#hero" onclick="toggleMobileMenu()">Головна</a>
+        <a href="#halls" onclick="toggleMobileMenu()">Зали</a>
+        <a href="#equipment" onclick="toggleMobileMenu()">Обладнання</a>
+        <a href="#rules" onclick="toggleMobileMenu()" onclick="toggleMobileMenu()">Правила</a>
+        <a href="#contacts" onclick="toggleMobileMenu()" onclick="toggleMobileMenu()">Контакти</a>
         <a href="tel:+380571234567">Подзвонити</a>
     </div>
     <div class="mt-auto">
-        <button class="w-full bg-primary text-on-primary py-5 font-bold uppercase tracking-widest" onclick="window.location.href='booking.html#calendar-section'; toggleMobileMenu();">ЗАБРОНЮВАТИ</button>
+        <button class="w-full bg-primary text-on-primary py-5 font-bold uppercase tracking-widest" onclick="window.location.href='#booking'; toggleMobileMenu();">ЗАБРОНЮВАТИ</button>
     </div>
-</div>
-
 
 <script>
     function toggleMobileMenu() {
@@ -372,6 +786,547 @@
             document.body.style.overflow = '';
         }
     }
+    
+    function closeIfMobile() {
+        const menu = document.getElementById('mobile-menu');
+        if (menu && !menu.classList.contains('translate-x-full')) {
+            toggleMobileMenu();
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const loader = document.getElementById('loader');
+        if(loader) {
+            if (sessionStorage.getItem('loaded') === 'true') {
+                loader.style.display = 'none';
+                revealElements();
+            } else {
+                sessionStorage.setItem('loaded', 'true');
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                        revealElements();
+                    }, 1000);
+                }, 1200);
+            }
+        } else {
+            revealElements();
+        }
+    });
+
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const revealElements = () => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    if (target.classList.contains('reveal-staggered')) {
+                        const delay = target.getAttribute('data-delay') || 0;
+                        setTimeout(() => {
+                            target.classList.add('active');
+                        }, delay);
+                    } else {
+                        target.classList.add('active', 'visible');
+                    }
+                    if (target.classList.contains('reveal-line')) {
+                        target.style.transform = 'scale-x(1)';
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll, .reveal, .reveal-line, .reveal-staggered, .reveal-slide-left, .dramatic-fade-in').forEach(el => observer.observe(el));
+    };
+
+    window.addEventListener('load', () => {
+        const dramatic = document.querySelector('.dramatic-fade-in');
+        if(dramatic) dramatic.classList.add('active');
+    });
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const heroImg = document.getElementById('hero-parallax-img');
+        
+        if(heroImg) {
+            const scale = 1 + scrolled * 0.00005;
+            const translate = scrolled * 0.05;
+            heroImg.style.transform = `scale(${scale}) translateY(${translate}px)`;
+        }
+        
+        const parallaxImg = document.querySelector('.parallax-image');
+        if (parallaxImg) {
+            const rect = parallaxImg.parentElement.getBoundingClientRect();
+            const offset = window.innerHeight - rect.top;
+            if (offset > 0 && rect.bottom > 0) {
+                const speed = 0.05; 
+                const yPos = (offset * speed);
+                parallaxImg.style.transform = `translateY(${yPos}px) scale(1.1)`; 
+            }
+        }
+    });
+
+    function filterHalls(category) {
+        const cards = document.querySelectorAll('.hall-card');
+        const buttons = document.querySelectorAll('.hall-filter-btn');
+
+        buttons.forEach(btn => {
+            btn.classList.remove('active', 'text-primary');
+            btn.classList.add('text-secondary');
+        });
+        
+        const currentBtn = event ? event.currentTarget : buttons[0];
+        if(currentBtn) {
+            currentBtn.classList.add('active', 'text-primary');
+            currentBtn.classList.remove('text-secondary');
+        }
+
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.95) translateY(20px)';
+            card.style.transition = 'opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            
+            setTimeout(() => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1) translateY(0)';
+                    }, 50);
+                } else {
+                    card.style.display = 'none';
+                }
+            }, 400);
+        });
+    }
+
+    
+    // ==========================================
+    // GOOGLE SHEETS API CONFIGURATION
+    // Paste your Google Web App URL here!
+    // Format: "https://script.google.com/macros/s/.../exec"
+    // ==========================================
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzczfaGoC8rqiVE6qAsYUiBIbjYQzvvTNuPInBUysHrUqCkwMbLWHlKbOSKENxBrcp2/exec";
+
+    // Month Names in Ukrainian
+    const MONTH_NAMES = [
+        "Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень",
+        "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"
+    ];
+
+    // Application state
+    let bookings = [];
+    let selectedHall = "Зал \"Symmetry\" (120м²)";
+    
+    // Initialize date variables dynamically to today's date
+    const _today = new Date();
+    const _todayStr = `${_today.getFullYear()}-${String(_today.getMonth() + 1).padStart(2, '0')}-${String(_today.getDate()).padStart(2, '0')}`;
+    
+    let selectedDate = _todayStr; 
+    let selectedTime = null; 
+    
+    // Set current month for the calendar
+    let currentDate = new Date(_today.getFullYear(), _today.getMonth(), 1); 
+
+    // DOM Elements
+    const calendarContainer = document.getElementById('calendar-container');
+    const monthTitle = document.getElementById('month-title');
+    const prevMonthBtn = document.getElementById('prev-month');
+    const nextMonthBtn = document.getElementById('next-month');
+    const hallSelect = document.getElementById('hall-select');
+    const bookingForm = document.getElementById('booking-form');
+    const clientNameInput = document.getElementById('client-name');
+    const clientPhoneInput = document.getElementById('client-phone');
+    const submitBtn = document.getElementById('submit-btn');
+    const submitBtnText = document.getElementById('submit-btn-text');
+    const timeSlots = document.querySelectorAll('#time-slots button');
+
+    // 1. Render Calendar Days dynamically based on currentDate
+    function renderCalendar() {
+        if (!calendarContainer || !monthTitle) return;
+        
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth(); // 0-11
+        
+        // Update Title (e.g. "Жовтень 2026")
+        monthTitle.textContent = `${MONTH_NAMES[month]} ${year}`;
+        
+        // Clear previous day cells
+        calendarContainer.innerHTML = '';
+        
+        // Calculate weekday index of the 1st of the month (1 = Mon, ..., 7 = Sun)
+        const firstDayIndex = new Date(year, month, 1).getDay();
+        const firstDayOfWeek = firstDayIndex === 0 ? 7 : firstDayIndex;
+        
+        // Calculate total days in current and previous months
+        const totalDays = new Date(year, month + 1, 0).getDate();
+        const prevTotalDays = new Date(year, month, 0).getDate();
+        
+        // Render empty spaces/placeholders for the trailing days of the previous month
+        const placeholderCount = firstDayOfWeek - 1;
+        for (let j = placeholderCount - 1; j >= 0; j--) {
+            const dayNum = prevTotalDays - j;
+            const emptyCell = document.createElement('div');
+            emptyCell.className = "aspect-square flex items-center justify-center text-primary/20 text-sm font-bold";
+            emptyCell.textContent = dayNum;
+            calendarContainer.appendChild(emptyCell);
+        }
+        
+        // Render days for the current month
+        for (let i = 1; i <= totalDays; i++) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.dataset.day = i;
+            
+            const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+            
+            // Highlight currently active date
+            if (dateStr === selectedDate) {
+                btn.className = "aspect-square flex items-center justify-center bg-primary text-on-primary font-black text-lg transition-all duration-300 transform active:scale-90 day-btn";
+            } else {
+                btn.className = "aspect-square flex items-center justify-center border border-transparent hover:border-primary hover:scale-110 font-black text-lg transition-all duration-300 transform active:scale-90 day-btn";
+            }
+            
+            btn.textContent = i;
+            
+            btn.addEventListener('click', () => {
+                selectedDate = dateStr;
+                
+                // Update day button visual active state
+                document.querySelectorAll('.day-btn').forEach(b => {
+                    b.classList.remove('bg-primary', 'text-on-primary');
+                    b.classList.add('border-transparent');
+                });
+                btn.classList.add('bg-primary', 'text-on-primary');
+                btn.classList.remove('border-transparent');
+                
+                updateAvailability();
+            });
+            
+            calendarContainer.appendChild(btn);
+        }
+    }
+
+    // 2. Fetch Bookings from Google Sheets / Load Demo data
+    async function loadBookings() {
+        const _submitBtn = document.getElementById('submit-btn');
+        const _submitBtnText = document.getElementById('submit-btn-text');
+        
+        if (_submitBtn) {
+            _submitBtn.disabled = true;
+            _submitBtn.classList.add('opacity-50', 'pointer-events-none');
+            _submitBtnText.textContent = "ЗАВАНТАЖЕННЯ ДАНИХ...";
+        }
+
+        if (GOOGLE_SCRIPT_URL) {
+            try {
+                // Добавляем временную метку (?_t=...), чтобы браузер не кэшировал данные и всегда брал свежую таблицу
+                const response = await fetch(`${GOOGLE_SCRIPT_URL}?_t=${new Date().getTime()}`);
+                if (response.ok) {
+                    const rawData = await response.json();
+                    
+                    // ХАК ДЛЯ СТАРОГО GOOGLE СКРИПТА: Нормалізуємо криві дати та час на стороні клієнта
+                    bookings = rawData.map(b => {
+                        let nDate = b.date;
+                        if (b.date && String(b.date).includes("T")) {
+                            const d = new Date(b.date);
+                            if (!isNaN(d)) {
+                                nDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+                            }
+                        }
+                        let nTime = b.time;
+                        if (b.time && (String(b.time).includes("GMT") || String(b.time).includes("T"))) {
+                            const t = new Date(b.time);
+                            if (!isNaN(t)) {
+                                let h = t.getHours();
+                                let m = t.getMinutes();
+                                // Округление для решения проблемы исторических часовых поясов (например, Safari возвращает 19:57 вместо 20:00)
+                                if (m > 45) { h = (h + 1) % 24; m = 0; }
+                                else if (m > 15 && m < 45) { m = 30; }
+                                else { m = 0; }
+                                nTime = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+                            }
+                        }
+                        return { ...b, date: nDate, time: nTime };
+                    });
+                } else {
+                    console.warn("Could not load bookings from Google Script. Using offline mode.");
+                    loadDemoBookings();
+                }
+            } catch (err) {
+                console.error("Connection error to Google Sheets API:", err);
+                loadDemoBookings();
+            }
+        } else {
+            loadDemoBookings();
+        }
+        updateAvailability();
+        
+        if (_submitBtn) {
+            _submitBtn.disabled = false;
+            _submitBtn.classList.remove('opacity-50', 'pointer-events-none');
+            _submitBtnText.textContent = "Забронювати зараз";
+        }
+    }
+
+    function loadDemoBookings() {
+        bookings = [
+            { date: "2026-10-03", time: "10:00", hall: "Зал \"Symmetry\" (120м²)" },
+            { date: "2026-10-03", time: "14:00", hall: "Зал \"Symmetry\" (120м²)" },
+            { date: "2026-10-15", time: "12:00", hall: "Зал \"Shadows\" (85м²)" },
+            { date: "2026-10-15", time: "14:00", hall: "Зал \"Shadows\" (85м²)" },
+            { date: "2026-10-20", time: "18:00", hall: "Зал \"Morning\" (150м²)" }
+        ];
+    }
+
+    // 3. Update Available/Occupied slots dynamically based on Hall and Date
+    function updateAvailability() {
+        let firstAvailableTime = null;
+        
+        timeSlots.forEach(slot => {
+            const slotTime = slot.textContent.trim();
+            
+            const isBooked = bookings.some(b => 
+                b.date === selectedDate && 
+                b.time === slotTime && 
+                b.hall === selectedHall &&
+                String(b.status || "Підтверджено").toLowerCase() !== "скасовано"
+            );
+            
+            if (isBooked) {
+                slot.className = "py-4 bg-gray-100 text-primary/20 border border-dashed border-primary/20 pointer-events-none line-through font-bold transform active:scale-95 transition-all duration-300";
+                if (selectedTime === slotTime) {
+                    selectedTime = null;
+                }
+            } else {
+                if (!firstAvailableTime) {
+                    firstAvailableTime = slotTime;
+                }
+                
+                if (selectedTime === slotTime) {
+                    slot.className = "py-4 bg-primary text-on-primary font-black hover:scale-105 transition-all duration-300 transform active:scale-95 slot-btn";
+                } else {
+                    slot.className = "py-4 border-2 border-primary font-black hover:bg-primary hover:text-on-primary hover:scale-105 transition-all duration-300 transform active:scale-95 slot-btn";
+                }
+            }
+        });
+        
+        if (!selectedTime && firstAvailableTime) {
+            selectedTime = firstAvailableTime;
+            updateAvailability();
+        }
+    }
+
+    // 4. Time Slot Click Listeners
+    timeSlots.forEach(slot => {
+        slot.addEventListener('click', () => {
+            const slotTime = slot.textContent.trim();
+            if (slot.classList.contains('line-through')) return;
+            selectedTime = slotTime;
+            updateAvailability();
+        });
+    });
+
+    // 5. Hall Selection Listener
+    if (hallSelect) {
+        hallSelect.addEventListener('change', (e) => {
+            selectedHall = e.target.value;
+            updateAvailability();
+        });
+    }
+
+    // 6. Month Navigation Listeners
+    if (prevMonthBtn) {
+        prevMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            
+            // Auto-update selectedDate to the 1st of the new month to keep selection in bounds
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            selectedDate = `${year}-${String(month + 1).padStart(2, '0')}-01`;
+            
+            renderCalendar(); 
+            updateAvailability();
+        });
+    }
+
+    if (nextMonthBtn) {
+        nextMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            selectedDate = `${year}-${String(month + 1).padStart(2, '0')}-01`;
+            
+            renderCalendar();
+            updateAvailability();
+        });
+    }
+
+    // 7. Form Submission to Google Sheet
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!selectedTime) {
+                alert("Будь ласка, оберіть доступний час для бронювання!");
+                return;
+            }
+            
+            const name = clientNameInput.value.trim();
+            const phone = clientPhoneInput.value.trim();
+            
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50', 'pointer-events-none');
+            submitBtnText.textContent = "БРОНЮВАННЯ...";
+            
+            if (GOOGLE_SCRIPT_URL) {
+                const payload = {
+                    name: name,
+                    phone: phone,
+                    hall: selectedHall,
+                    date: selectedDate,
+                    time: selectedTime
+                };
+                
+                try {
+                    const response = await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        body: JSON.stringify(payload),
+                        headers: {
+                            'Content-Type': 'text/plain;charset=utf-8' // Використовуємо text/plain для JSON, щоб уникнути CORS в Google Scripts
+                        }
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.status === "success") {
+                        bookings.push({
+                            date: selectedDate,
+                            time: selectedTime,
+                            hall: selectedHall,
+                            status: "Підтверджено"
+                        });
+                        showSuccessModal(false);
+                        bookingForm.reset();
+                    } else {
+                        alert("Помилка під час бронювання: " + result.message);
+                    }
+                } catch (err) {
+                    console.error("Post error:", err);
+                    alert("Сталася помилка з'єднання. Перевірте підключення до мережі.");
+                }
+            } else {
+                setTimeout(() => {
+                    bookings.push({
+                        date: selectedDate,
+                        time: selectedTime,
+                        hall: selectedHall,
+                        status: "Підтверджено"
+                    });
+                    showSuccessModal(true);
+                    bookingForm.reset();
+                }, 800);
+            }
+            
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-50', 'pointer-events-none');
+            submitBtnText.textContent = "ЗАБРОНЮВАТИ ЗАРАЗ";
+            updateAvailability();
+        });
+    }
+
+    // 8. Success Modal Helper
+    function showSuccessModal(isDemo) {
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 z-[200] bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm';
+        modal.id = 'success-modal';
+        
+        window.closeModal = function() {
+            document.getElementById('success-modal').remove();
+        };
+        
+        modal.innerHTML = `
+            <div class="bg-white text-black border-4 border-black p-8 md:p-12 max-w-md w-full text-center space-y-8 transform transition-transform duration-500 scale-100">
+                <div class="flex justify-center">
+                    <span class="material-symbols-outlined text-7xl text-black">check_circle</span>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-3xl font-black uppercase tracking-tighter">УСПІШНО ЗАБРОНЬОВАНО</h3>
+                    <p class="font-bold uppercase tracking-wider text-xs opacity-50">${selectedHall}</p>
+                    <p class="text-lg font-black uppercase">${selectedDate.split('-').reverse().join('.')} о ${selectedTime}</p>
+                    <p class="text-sm font-semibold text-secondary leading-snug">
+                        ${isDemo 
+                          ? `<strong class="text-black">Демо-режим:</strong> Бронювання додано локально в пам'ять сайту!<br/><br/><span class="text-xs text-secondary/60">Щоб підключити вашу реальну Google Таблицю, вставьте її URL-адрес веб-програми у файл <code class="bg-gray-100 px-1 py-0.5 font-mono text-xs text-black border border-gray-200">booking.html</code> в рядок <code class="bg-gray-100 px-1 py-0.5 font-mono text-xs text-black border border-gray-200">const GOOGLE_SCRIPT_URL = "...";</code></span>`
+                          : "Дякуємо, ми зв'яжемося з вами найближчим часом для підтвердження зйомки."
+                        }
+                    </p>
+                </div>
+                <button onclick="closeModal()" class="w-full bg-black text-white py-4 font-black uppercase tracking-widest hover:bg-secondary transition-all active:scale-95 duration-200">ЗАКРИТИ</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+
+    // 9. Input Label Animations
+    document.querySelectorAll('input, select').forEach(el => {
+        el.addEventListener('focus', () => {
+            const label = el.closest('.space-y-4').querySelector('label');
+            if (label) {
+                label.classList.add('text-primary');
+                label.classList.remove('opacity-50');
+                label.style.transform = 'translateY(-2px)';
+            }
+        });
+        el.addEventListener('blur', () => {
+            const label = el.closest('.space-y-4').querySelector('label');
+            if (label && !el.value) {
+                label.classList.add('opacity-50');
+                label.style.transform = 'translateY(0)';
+            }
+        });
+    });
+
+    // 10. Intersection Observer Scroll Reveal
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                if (entry.target.classList.contains('reveal-line')) {
+                    entry.target.style.transform = 'scale-x(1)';
+                }
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal, .reveal-line').forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // Initialize application on load
+    renderCalendar();
+    loadBookings();
+
+
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        if (menu.classList.contains('translate-x-full')) {
+            menu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
+        } else {
+            menu.classList.add('translate-x-full');
+            document.body.style.overflow = '';
+        }
+    }
+
 </script>
 
 </body></html>
